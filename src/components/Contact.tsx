@@ -42,7 +42,7 @@ export default function Contact() {
             method="POST"
             className="flex flex-col gap-8 flex-grow"
           >
-            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE" />
+            <input type="hidden" name="access_key" value="dc17bd35-b312-486d-959a-d781714a6400" />
             <div className="flex flex-col sm:flex-row gap-8">
               <div className="flex-1">
                 <input
@@ -85,12 +85,12 @@ export default function Contact() {
           {/* Coffee Donation Button */}
           <div className="mt-8 pt-8 border-t border-white/10 flex justify-center">
             <motion.a
-              href="https://coffeebede.com/"
+              href="https://coffeebede.com/rahnama"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/90 hover:bg-white/10 hover:border-white/30 transition-all"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/90 hover:bg-white/10 hover:border-white/30 transition-all shadow-[0_0_15px_rgba(255,221,0,0.15)] hover:shadow-[0_0_25px_rgba(255,221,0,0.25)]"
             >
               <Coffee size={18} className="text-[#FFDD00]" />
               <span className="font-medium text-sm">{t('contact.coffee')}</span>

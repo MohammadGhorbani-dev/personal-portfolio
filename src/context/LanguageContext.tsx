@@ -10,6 +10,7 @@ interface LanguageContextType {
 
 const dictionary = {
   en: {
+    'name': 'Mohamad Ghorbani',
     'nav.home': 'Home',
     'nav.projects': 'Projects',
     'nav.skills': 'Skills',
@@ -40,10 +41,17 @@ const dictionary = {
     'contact.message': 'Message',
     'contact.send': 'Send Message',
     'contact.coffee': 'Buy me a coffee',
+    'contact.coffeeTooltip': 'Support my work & keep me caffeinated!',
+    'contact.err.name': 'Name is required',
+    'contact.err.email': 'Email is required',
+    'contact.err.message': 'Message cannot be empty',
+    'contact.direct': 'Or email me directly:',
     'social.playing': 'Playing CS2 & Battlefield 6',
+    'social.telegram': 'Telegram',
     'footer.copy': '© 2026 Mohamad Ghorbani. Crafted with React & AI.',
   },
   fa: {
+    'name': 'محمد قربانی',
     'nav.home': 'خانه',
     'nav.projects': 'پروژهها',
     'nav.skills': 'مهارتها',
@@ -74,7 +82,13 @@ const dictionary = {
     'contact.message': 'پیام',
     'contact.send': 'ارسال پیام',
     'contact.coffee': 'مهمانم کن',
+    'contact.coffeeTooltip': 'با یک قهوه از من حمایت کن!',
+    'contact.err.name': 'نام الزامی است',
+    'contact.err.email': 'ایمیل الزامی است',
+    'contact.err.message': 'پیام نمیتواند خالی باشد',
+    'contact.direct': 'یا مستقیماً به من ایمیل بزنید:',
     'social.playing': 'در حال بازی CS2 و Battlefield 6',
+    'social.telegram': 'تلگرام',
     'footer.copy': '© ۲۰۲۶ محمد قربانی. ساخته شده با React و هوش مصنوعی.',
   }
 };

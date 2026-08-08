@@ -16,11 +16,11 @@ const containerVariants = {
 };
 
 const badgeVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
@@ -31,19 +31,19 @@ export default function Skills() {
     <section id="skills" className="relative z-10 w-full max-w-4xl mx-auto px-6 py-24">
       <div className="text-center mb-16">
         <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-3xl md:text-4xl font-bold tracking-tight text-white/90 mb-4"
         >
           {t('skills.title')}
         </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
           className="text-gray-400 text-lg max-w-2xl mx-auto"
         >
           {t('skills.subtitle')}

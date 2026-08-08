@@ -22,12 +22,12 @@ export default function Navbar() {
         className="flex items-center justify-between px-6 py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
       >
         {/* Logo */}
-        <div className="text-white font-medium text-lg tracking-wide cursor-default whitespace-nowrap">
-          Mohammad.dev
+        <div className="text-white font-medium text-lg tracking-wide cursor-default whitespace-nowrap font-semibold">
+          {t('name')}
         </div>
 
         {/* Links */}
-        <ul className="flex items-center gap-1 sm:gap-2">
+        <ul className="flex items-center gap-1 sm:gap-2 mis-auto">
           {navLinks.map((link, index) => (
             <li key={link.key} className="relative hidden sm:block">
               <a
@@ -45,13 +45,13 @@ export default function Navbar() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
                 />
               )}
             </li>
           ))}
           
-          <li className="pl-2 sm:pl-4 sm:ml-2 sm:border-l border-white/10">
+          <li className="pis-2 sm:pis-4 sm:mis-2 sm:border-is border-white/10">
             <button
               onClick={toggleLang}
               className="px-3 py-1.5 text-xs font-semibold tracking-wider rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white border border-white/5"

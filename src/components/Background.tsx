@@ -11,6 +11,7 @@ export default function Background() {
         }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[-15%] left-[-10%] w-[50vw] h-[50vw] bg-blue-900/40 rounded-full blur-[120px]"
+        style={{ willChange: 'transform' }}
       />
       <motion.div
         animate={{
@@ -20,6 +21,7 @@ export default function Background() {
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-purple-900/30 rounded-full blur-[140px]"
+        style={{ willChange: 'transform' }}
       />
       <motion.div
         animate={{
@@ -29,6 +31,7 @@ export default function Background() {
         }}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[30%] left-[40%] w-[40vw] h-[40vw] bg-fuchsia-900/20 rounded-full blur-[130px]"
+        style={{ willChange: 'transform' }}
       />
       <motion.div
         animate={{
@@ -38,6 +41,7 @@ export default function Background() {
         }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[60%] left-[-10%] w-[35vw] h-[35vw] bg-blue-950/40 rounded-full blur-[100px]"
+        style={{ willChange: 'transform' }}
       />
       <motion.div
         animate={{
@@ -47,6 +51,7 @@ export default function Background() {
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[10%] right-[10%] w-[30vw] h-[30vw] bg-indigo-900/30 rounded-full blur-[110px]"
+        style={{ willChange: 'transform' }}
       />
     </div>
   );

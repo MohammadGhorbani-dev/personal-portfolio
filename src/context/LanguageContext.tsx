@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 
 type Language = 'en' | 'fa';
 
@@ -65,9 +65,9 @@ const dictionary = {
   fa: {
     'name': 'محمد قربانی',
     'nav.home': 'خانه',
-    'nav.projects': 'پروژهها',
+    'nav.projects': 'پروژه ها',
     'nav.journey': 'مسیر من',
-    'nav.skills': 'مهارتها',
+    'nav.skills': 'مهارت ها',
     'nav.contact': 'تماس',
     'hero.greeting.morning': 'صبح بخیر',
     'hero.greeting.afternoon': 'عصر بخیر',
@@ -76,12 +76,12 @@ const dictionary = {
     'hero.badge': 'سلام، دنیا!',
     'hero.title': 'محمد قربانی',
     'hero.subtitle': 'دانشجوی مهندسی کامپیوتر',
-    'hero.desc': 'من دانشجوی مهندسی کامپیوتر هستم که عاشق دنیای کامپیوتره؛ از کدنویسی و سختافزار گرفته تا ساخت ابزارهایی که کارهای روزمره رو برای اطرافیانم سادهتر میکنه. همیشه دنبال تجربههای جدیدم و در زمینههای مختلفی از پشتیبانی گرفته تا دندانسازی فعالیت داشتم که باعث شده دید بازتری به حل مسائل داشته باشم. در اوقات فراغتم بیشتر گیم میزنم، موزیک گوش میدم یا با تکنولوژیهای جدید کار میکنم. همیشه از همصحبتی و همکاری با افراد جدید تو زمینههای مختلف خوشحال میشم!',
-    'hero.cta.explore': 'پروژههای من',
+    'hero.desc': 'من دانشجوی مهندسی کامپیوتر هستم که عاشق دنیای کامپیوتره؛ از کدنویسی و سخت افزار گرفته تا ساخت ابزارهایی که کارهای روزمره رو برای اطرافیانم ساده تر میکنه. همیشه دنبال تجربه های جدیدم و در زمینه های مختلفی از پشتیبانی گرفته تا دندانسازی فعالیت داشتم که باعث شده دید بازتری به حل مسائل داشته باشم. در اوقات فراغتم بیشتر گیم میزنم، موزیک گوش میدم یا با تکنولوژی های جدید کار میکنم. همیشه از هم صحبتی و همکاری با افراد جدید تو زمینه های مختلف خوشحال میشم!',
+    'hero.cta.explore': 'پروژه های من',
     'hero.cta.touch': 'ارتباط با من',
     'hero.cta.cv': 'دانلود رزومه',
-    'projects.title': 'پروژههای منتخب',
-    'projects.subtitle': 'نمایشی از پروژههای اخیر دانشگاهی و فریلنسری من.',
+    'projects.title': 'پروژه های منتخب',
+    'projects.subtitle': 'نمایشی از پروژه های اخیر دانشگاهی و فریلنسری من.',
     'projects.p1.title': 'پورتال دانشجویی دانشگاه',
     'projects.p1.desc': 'یک پروژه جامع مدیریت دانشگاه با امکان انتخاب واحد، اخبار و رزرو اتاق.',
     'projects.p2.title': 'پیام‌رسان فراوین',
@@ -98,14 +98,14 @@ const dictionary = {
     'contact.email': 'ایمیل',
     'contact.message': 'پیام',
     'contact.send': 'ارسال پیام',
-    'contact.coffee': 'مهمانم کن',
+    'contact.coffee': 'کافی مهمونم میکنی',
     'contact.coffeeTooltip': 'با یک قهوه از من حمایت کن!',
     'contact.err.name': 'تکمیل این فیلد الزامی است.',
     'contact.err.email': 'تکمیل این فیلد الزامی است.',
     'contact.err.message': 'تکمیل این فیلد الزامی است.',
     'contact.direct': 'یا مستقیماً به من ایمیل بزنید:',
-    'social.playing': 'در حال بازی CS2 و Battlefield 6',
-    'social.telegram': 'تلگرام',
+    'social.playing': 'Play with me',
+    'social.telegram': 'Telegram',
     'footer.copy': '© ۲۰۲۶ محمد قربانی. ساخته شده با React و هوش مصنوعی.',
     'timeline.title': 'مسیر من',
     'timeline.node1.title': 'کارشناسی مهندسی کامپیوتر',
@@ -121,6 +121,11 @@ export const LanguageContext = createContext<LanguageContextType | undefined>(un
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<Language>('en');
+
+  useEffect(() => {
+    document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const toggleLang = () => {
     setLang(prev => prev === 'en' ? 'fa' : 'en');

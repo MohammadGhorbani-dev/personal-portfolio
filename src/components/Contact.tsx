@@ -264,7 +264,7 @@ export default function Contact() {
             </div>
             <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">
               <span className="font-medium text-white/90">Spotify</span>
-              <span className="text-xs text-white/40">Vibing</span>
+              <span className="text-xs text-white/40">Listen with me</span>
             </div>
           </a>
         </MagneticWrapper>

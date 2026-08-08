@@ -271,8 +271,8 @@ export default function Contact() {
 
         {/* Steam Badge */}
         <MagneticWrapper className="col-span-2 md:col-span-4">
-          <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all group block">
-            <div style={{ backgroundImage: "url('/assets/gifs/steam.gif')", backgroundPosition: "50% 20%" }} className="absolute inset-0 bg-cover z-0"></div>
+          <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="h-36 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all group block">
+            <div style={{ backgroundImage: "url('/assets/gifs/steam.gif')", backgroundPosition: "50% 98%" }} className="absolute inset-0 bg-cover z-0"></div>
             <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
             <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors relative z-10">
               <Gamepad2 className="text-blue-400" size={24} />

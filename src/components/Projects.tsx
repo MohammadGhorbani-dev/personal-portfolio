@@ -53,7 +53,7 @@ export default function Projects() {
       gradient: 'from-emerald-500/20 to-teal-500/20',
       image: '/p1.jpg',
       github: "https://github.com/MohammadGhorbani-dev/Farawin-messenger",
-      live: "https://mohammadghorbani-dev.github.io/Farawin-messenger/"
+      live: null
     },
     {
       title: t('projects.p4.title'), // TodoList
@@ -71,7 +71,7 @@ export default function Projects() {
       gradient: 'from-orange-500/20 to-red-500/20',
       image: '/p3.jpg',
       github: "https://github.com/MohammadGhorbani-dev/Contacts-manager",
-      live: "https://contact-manager.iran.liara.run/"
+      live: null
     },
     {
       title: t('projects.p1.title'), // University portal

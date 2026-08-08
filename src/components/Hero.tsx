@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Download } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import MagneticWrapper from './MagneticWrapper';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,9 +30,28 @@ const itemVariants = {
 
 export default function Hero() {
   const { lang, t } = useLanguage();
+  const [greeting, setGreeting] = useState('');
+  const [emoji, setEmoji] = useState('');
+
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      setGreeting('hero.greeting.morning');
+      setEmoji('☀️');
+    } else if (hour >= 12 && hour < 17) {
+      setGreeting('hero.greeting.afternoon');
+      setEmoji('🌤️');
+    } else if (hour >= 17 && hour < 21) {
+      setGreeting('hero.greeting.evening');
+      setEmoji('🌇');
+    } else {
+      setGreeting('hero.greeting.night');
+      setEmoji('🌙');
+    }
+  }, []);
 
   return (
-    <main id="home" className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-6 pt-24 pb-12">
+    <main id="home" className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-4 md:px-8 pt-24 pb-12">
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -44,8 +65,8 @@ export default function Hero() {
         {/* Badge */}
         <motion.div variants={itemVariants} className="mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-sm text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-            <span>{t('hero.badge')}</span>
-            <span className="text-base">👋</span>
+            <span>{greeting ? t(greeting) : t('hero.badge')}</span>
+            <span className="text-base">{emoji || '👋'}</span>
           </div>
         </motion.div>
 
@@ -75,35 +96,41 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full flex-wrap">
-          <motion.a
-            href="#projects"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-medium text-center transition-colors hover:bg-white/90 shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-          >
-            {t('hero.cta.explore')}
-          </motion.a>
+          <MagneticWrapper>
+            <motion.a
+              href="#projects"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="block w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-medium text-center transition-colors hover:bg-white/90 shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+            >
+              {t('hero.cta.explore')}
+            </motion.a>
+          </MagneticWrapper>
           
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white text-center font-medium transition-colors hover:bg-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
-          >
-            {t('hero.cta.touch')}
-          </motion.a>
+          <MagneticWrapper>
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="block w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white text-center font-medium transition-colors hover:bg-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              {t('hero.cta.touch')}
+            </motion.a>
+          </MagneticWrapper>
 
-          <motion.a
-            href="/cv.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-transparent border border-white/20 text-white font-medium transition-colors hover:bg-white/5 hover:border-white/40 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
-          >
-            <Download size={18} />
-            {t('hero.cta.cv')}
-          </motion.a>
+          <MagneticWrapper>
+            <motion.a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-transparent border border-white/20 text-white font-medium transition-colors hover:bg-white/5 hover:border-white/40 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+            >
+              <Download size={18} />
+              {t('hero.cta.cv')}
+            </motion.a>
+          </MagneticWrapper>
         </motion.div>
       </motion.section>
     </main>

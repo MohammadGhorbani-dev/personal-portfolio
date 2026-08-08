@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
-import { FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaFigma } from "react-icons/fa";
-import { SiNextdotjs, SiTypescript, SiJavascript, SiRedux, SiMui, SiTailwindcss, SiCplusplus, SiVite, SiFirebase } from "react-icons/si";
+import { FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaFigma, FaRobot, FaEnvelope } from "react-icons/fa";
+import { SiNextdotjs, SiTypescript, SiJavascript, SiRedux, SiMui, SiTailwindcss, SiCplusplus, SiVite, SiFirebase, SiFramer } from "react-icons/si";
 
 const skills = [
   { name: 'React', icon: <FaReact color="#61DAFB" size={20} /> },
@@ -16,7 +16,10 @@ const skills = [
   { name: 'Vite', icon: <SiVite color="#646CFF" size={20} /> },
   { name: 'Git', icon: <FaGitAlt color="#F05032" size={20} /> },
   { name: 'Figma', icon: <FaFigma color="#F24E1E" size={20} /> },
-  { name: 'Firebase', icon: <SiFirebase color="#FFCA28" size={20} /> }
+  { name: 'Firebase', icon: <SiFirebase color="#FFCA28" size={20} /> },
+  { name: 'Framer Motion', icon: <SiFramer color="#0055FF" size={20} /> },
+  { name: 'AI Studio', icon: <FaRobot color="#A855F7" size={20} /> },
+  { name: 'Web3Forms', icon: <FaEnvelope color="#3B82F6" size={20} /> }
 ];
 
 const containerVariants = {
@@ -40,7 +43,7 @@ export default function Skills() {
   const { lang, t } = useLanguage();
 
   return (
-    <section id="skills" className="relative z-10 w-full max-w-4xl mx-auto px-6 py-24">
+    <section id="skills" className="relative z-10 w-full max-w-5xl mx-auto px-4 md:px-8 py-24">
       <div className="text-center mb-16">
         <motion.h2 
           initial={{ opacity: 0, y: 40 }}

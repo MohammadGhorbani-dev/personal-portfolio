@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Github, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { FaLaptopCode } from 'react-icons/fa';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -18,6 +20,27 @@ const cardVariants = {
     transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
   }
 };
+
+function ProjectImage({ src, alt }: { src: string, alt: string }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (!src || hasError) {
+    return (
+      <div className="w-full h-48 rounded-t-2xl bg-white/5 flex items-center justify-center border-b border-white/10">
+        <FaLaptopCode size={40} color="rgba(59, 130, 246, 0.5)" />
+      </div>
+    );
+  }
+
+  return (
+    <img 
+      src={src} 
+      alt={alt} 
+      onError={() => setHasError(true)}
+      className="w-full h-48 object-cover rounded-t-2xl" 
+    />
+  );
+}
 
 export default function Projects() {
   const { lang, t } = useLanguage();
@@ -62,7 +85,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24">
+    <section id="projects" className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 py-24">
       {/* Section Header */}
       <div className="text-center mb-16">
         <motion.h2 
@@ -100,7 +123,7 @@ export default function Projects() {
             whileHover={{ scale: 1.02 }}
             className="group relative flex flex-col rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-white/30 hover:shadow-[0_8px_32px_rgba(255,255,255,0.05)]"
           >
-            <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-2xl" />
+            <ProjectImage src={project.image} alt={project.title} />
 
             {/* Content Area */}
             <div className="flex flex-col flex-grow p-6 sm:p-8">

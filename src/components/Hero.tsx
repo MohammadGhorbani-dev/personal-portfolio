@@ -52,7 +52,7 @@ export default function Hero() {
         {/* Headline */}
         <motion.h1 
           variants={itemVariants}
-          className={`text-5xl sm:text-6xl md:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 ${lang === 'en' ? 'tracking-tight' : ''}`}
+          className={`text-5xl sm:text-6xl md:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 leading-normal py-2 overflow-visible ${lang === 'en' ? 'tracking-tight' : ''}`}
         >
           {t('hero.title')}
         </motion.h1>

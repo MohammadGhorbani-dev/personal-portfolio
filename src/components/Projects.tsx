@@ -100,10 +100,7 @@ export default function Projects() {
             whileHover={{ scale: 1.02 }}
             className="group relative flex flex-col rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-white/30 hover:shadow-[0_8px_32px_rgba(255,255,255,0.05)]"
           >
-            <div className={`h-52 w-full relative overflow-hidden bg-gradient-to-br ${project.gradient}`}>
-              <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-80"></div>
-            </div>
+            <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-3xl" />
 
             {/* Content Area */}
             <div className="flex flex-col flex-grow p-6 sm:p-8">

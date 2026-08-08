@@ -1,0 +1,6 @@
+{
+  "name": "Mohammad.dev Portfolio",
+  "description": "A modern, premium personal portfolio with a dark Apple Liquid Glass aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

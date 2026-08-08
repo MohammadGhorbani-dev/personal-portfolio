@@ -100,7 +100,7 @@ export default function Projects() {
             whileHover={{ scale: 1.02 }}
             className="group relative flex flex-col rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-white/30 hover:shadow-[0_8px_32px_rgba(255,255,255,0.05)]"
           >
-            <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-3xl" />
+            <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-t-2xl" />
 
             {/* Content Area */}
             <div className="flex flex-col flex-grow p-6 sm:p-8">

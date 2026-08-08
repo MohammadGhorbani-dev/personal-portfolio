@@ -1,10 +1,22 @@
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
+import { FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaFigma } from "react-icons/fa";
+import { SiNextdotjs, SiTypescript, SiJavascript, SiRedux, SiMui, SiTailwindcss, SiCplusplus, SiVite, SiFirebase } from "react-icons/si";
 
 const skills = [
-  'React', 'Vite', 'JavaScript', 'TypeScript', 'Firebase',
-  'Tailwind CSS', 'Framer Motion', 'Git', 'NextUI', 'Node.js',
-  'Figma', 'UI/UX Design'
+  { name: 'React', icon: <FaReact color="#61DAFB" size={20} /> },
+  { name: 'Next.js', icon: <SiNextdotjs color="#ffffff" size={20} /> },
+  { name: 'TypeScript', icon: <SiTypescript color="#3178C6" size={20} /> },
+  { name: 'JavaScript', icon: <SiJavascript color="#F7DF1E" size={20} /> },
+  { name: 'Redux', icon: <SiRedux color="#764ABC" size={20} /> },
+  { name: 'Material-UI', icon: <SiMui color="#007FFF" size={20} /> },
+  { name: 'Tailwind CSS', icon: <SiTailwindcss color="#06B6D4" size={20} /> },
+  { name: 'HTML/CSS', icon: <div className="flex -space-x-1"><FaHtml5 color="#E34F26" size={20} /><FaCss3Alt color="#1572B6" size={20} /></div> },
+  { name: 'C++', icon: <SiCplusplus color="#00599C" size={20} /> },
+  { name: 'Vite', icon: <SiVite color="#646CFF" size={20} /> },
+  { name: 'Git', icon: <FaGitAlt color="#F05032" size={20} /> },
+  { name: 'Figma', icon: <FaFigma color="#F24E1E" size={20} /> },
+  { name: 'Firebase', icon: <SiFirebase color="#FFCA28" size={20} /> }
 ];
 
 const containerVariants = {
@@ -59,7 +71,7 @@ export default function Skills() {
       >
         {skills.map((skill) => (
           <motion.div
-            key={skill}
+            key={skill.name}
             variants={badgeVariants}
             whileHover={{ 
               scale: 1.05, 
@@ -67,9 +79,10 @@ export default function Skills() {
               borderColor: 'rgba(255,255,255,0.3)',
               backgroundColor: 'rgba(255,255,255,0.1)'
             }}
-            className="px-6 py-3 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-white/80 font-medium transition-colors shadow-[0_4px_30px_rgba(0,0,0,0.1)] cursor-default"
+            className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-white/80 font-medium transition-colors shadow-[0_4px_30px_rgba(0,0,0,0.1)] cursor-default"
           >
-            {skill}
+            {skill.icon}
+            <span>{skill.name}</span>
           </motion.div>
         ))}
       </motion.div>

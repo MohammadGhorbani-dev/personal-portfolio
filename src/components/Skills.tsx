@@ -25,7 +25,7 @@ const badgeVariants = {
 };
 
 export default function Skills() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
     <section id="skills" className="relative z-10 w-full max-w-4xl mx-auto px-6 py-24">
@@ -35,7 +35,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-3xl md:text-4xl font-bold tracking-tight text-white/90 mb-4"
+          className={`text-3xl md:text-4xl font-bold text-white/90 mb-4 ${lang === 'en' ? 'tracking-tight' : ''}`}
         >
           {t('skills.title')}
         </motion.h2>

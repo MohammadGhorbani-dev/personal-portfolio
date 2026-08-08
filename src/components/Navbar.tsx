@@ -22,7 +22,7 @@ export default function Navbar() {
         className="flex items-center justify-between px-6 py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
       >
         {/* Logo */}
-        <div className="text-white font-medium text-lg tracking-wide cursor-default whitespace-nowrap font-semibold">
+        <div className={`text-white font-medium text-lg cursor-default whitespace-nowrap font-semibold ${lang === 'en' ? 'tracking-wide' : ''}`}>
           {t('name')}
         </div>
 
@@ -34,7 +34,7 @@ export default function Navbar() {
                 href={link.href}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className="relative block px-3 md:px-4 py-2 text-sm text-white/80 hover:text-white transition-colors z-10"
+                className={`relative block px-3 md:px-4 py-2 text-sm text-white/80 hover:text-white transition-colors z-10 ${lang === 'en' ? 'tracking-wide' : ''}`}
               >
                 {t(link.key)}
               </a>
@@ -54,7 +54,7 @@ export default function Navbar() {
           <li className="pis-2 sm:pis-4 sm:mis-2 sm:border-is border-white/10">
             <button
               onClick={toggleLang}
-              className="px-3 py-1.5 text-xs font-semibold tracking-wider rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white border border-white/5"
+              className={`px-3 py-1.5 text-xs font-semibold rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white border border-white/5 ${lang === 'en' ? 'tracking-wider' : ''}`}
             >
               {lang === 'en' ? 'FA' : 'EN'}
             </button>

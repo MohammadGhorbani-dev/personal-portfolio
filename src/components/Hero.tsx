@@ -27,7 +27,7 @@ const itemVariants = {
 };
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
     <main id="home" className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-6 pt-24 pb-12">
@@ -37,6 +37,10 @@ export default function Hero() {
         animate="visible"
         className="flex flex-col items-center max-w-3xl mx-auto text-center"
       >
+        <motion.div variants={itemVariants} className="mb-6">
+          <img src="/profile.jpg" alt="Mohamad Ghorbani" className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.05)] mx-auto" />
+        </motion.div>
+
         {/* Badge */}
         <motion.div variants={itemVariants} className="mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-sm text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
@@ -48,7 +52,7 @@ export default function Hero() {
         {/* Headline */}
         <motion.h1 
           variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
+          className={`text-5xl sm:text-6xl md:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 ${lang === 'en' ? 'tracking-tight' : ''}`}
         >
           {t('hero.title')}
         </motion.h1>
@@ -56,7 +60,7 @@ export default function Hero() {
         {/* Sub-headline */}
         <motion.h2 
           variants={itemVariants}
-          className="text-xl sm:text-2xl font-medium text-white/60 mb-6 tracking-wide"
+          className={`text-xl sm:text-2xl font-medium text-white/60 mb-6 ${lang === 'en' ? 'tracking-wide' : ''}`}
         >
           {t('hero.subtitle')}
         </motion.h2>

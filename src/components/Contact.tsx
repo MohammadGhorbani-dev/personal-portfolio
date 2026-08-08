@@ -1,10 +1,10 @@
 import { motion } from 'motion/react';
 import { Coffee, Linkedin, Github, Music, Gamepad2, CheckCircle2, Send } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [cooldownLeft, setCooldownLeft] = useState(0);
@@ -101,7 +101,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-3xl md:text-4xl font-bold tracking-tight text-white/90 mb-4"
+          className={`text-3xl md:text-4xl font-bold text-white/90 mb-4 ${lang === 'en' ? 'tracking-tight' : ''}`}
         >
           {t('contact.title')}
         </motion.h2>
@@ -194,26 +194,13 @@ export default function Contact() {
                 </motion.div>
               )}
             </div>
+            
+            <div className="mt-4 text-center">
+              <p className="text-white/50 text-sm">
+                {t('contact.direct')} <a href="mailto:mohamad.ghorbani.official@gmail.com" className="text-white hover:underline transition-colors">mohamad.ghorbani.official@gmail.com</a>
+              </p>
+            </div>
           </form>
-
-          {/* Coffee Donation Button */}
-          <div className="mt-8 pt-8 border-t border-white/10 flex flex-col items-center">
-            <motion.a
-              href="https://coffeebede.com/rahnama"
-              target="_blank"
-              rel="noopener noreferrer"
-              title={t('contact.coffeeTooltip')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/90 hover:bg-white/10 hover:border-white/30 transition-all shadow-[0_0_15px_rgba(255,221,0,0.15)] hover:shadow-[0_0_25px_rgba(255,221,0,0.25)]"
-            >
-              <Coffee size={18} className="text-[#FFDD00]" />
-              <span className="font-medium text-sm">{t('contact.coffee')}</span>
-            </motion.a>
-            <p className="mt-6 text-white/50 text-sm">
-              {t('contact.direct')} <a href="mailto:mohamad.ghorbani.official@gmail.com" className="text-white hover:underline transition-colors">mohamad.ghorbani.official@gmail.com</a>
-            </p>
-          </div>
         </motion.div>
       </div>
 
@@ -223,10 +210,10 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-        className="mt-12 flex flex-wrap justify-center gap-4 max-w-5xl mx-auto"
+        className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto"
       >
         {/* LinkedIn */}
-        <div className="flex-1 min-w-[180px] flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 opacity-50 cursor-not-allowed group">
+        <div className="h-32 w-full flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 opacity-50 cursor-not-allowed group">
           <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">
             <Linkedin className="text-blue-400" size={24} />
           </div>
@@ -237,45 +224,72 @@ export default function Contact() {
         </div>
 
         {/* GitHub */}
-        <a href="https://github.com/MohammadGhorbani-dev" target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[180px] flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group">
-          <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors">
+        <a href="https://github.com/MohammadGhorbani-dev" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group">
+          <div style={{ backgroundImage: "url('/assets/gifs/github.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
+          <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors relative z-10">
             <Github className="text-white" size={24} />
           </div>
-          <span className="font-medium text-white/90">GitHub</span>
+          <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">GitHub</span>
         </a>
 
         {/* Telegram */}
-        <a href="https://t.me/YOUR_TELEGRAM_ID" target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[180px] flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-400/40 transition-all group">
-          <div className="p-3 bg-blue-400/10 rounded-2xl group-hover:bg-blue-400/20 transition-colors">
+        <a href="https://t.me/MrMGH_1999" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-400/40 transition-all group">
+          <div style={{ backgroundImage: "url('/assets/gifs/telegram.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
+          <div className="p-3 bg-blue-400/10 rounded-2xl group-hover:bg-blue-400/20 transition-colors relative z-10">
             <Send className="text-blue-400" size={24} />
           </div>
-          <span className="font-medium text-white/90">{t('social.telegram')}</span>
+          <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">{t('social.telegram')}</span>
         </a>
 
         {/* Spotify */}
-        <a href="https://open.spotify.com/user/31f3fkgfesvzseehg7hqxlsz3j4q?si=130b58e4b389409f" target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[200px] relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#1DB954]/40 transition-all group">
-          <div className="absolute inset-0 bg-[url('/spotify.gif')] bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none group-hover:opacity-40 transition-opacity z-0"></div>
+        <a href="https://open.spotify.com/user/31f3fkgfesvzseehg7hqxlsz3j4q?si=130b58e4b389409f" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#1DB954]/40 transition-all group">
+          <div style={{ backgroundImage: "url('/assets/gifs/spotify.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
           <div className="p-3 bg-[#1DB954]/10 rounded-2xl group-hover:bg-[#1DB954]/20 transition-colors relative z-10">
             <Music className="text-[#1DB954]" size={24} />
           </div>
-          <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+          <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">
             <span className="font-medium text-white/90">Spotify</span>
             <span className="text-xs text-white/40">Vibing</span>
           </div>
         </a>
 
         {/* Steam Badge */}
-        <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="flex-[2] min-w-[260px] relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all group">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-          <div className="absolute inset-0 bg-[url('/steam.gif')] bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none group-hover:opacity-40 transition-opacity z-0"></div>
+        <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="col-span-2 md:col-span-4 h-32 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all group">
+          <div style={{ backgroundImage: "url('/assets/gifs/steam.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
           <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors relative z-10">
             <Gamepad2 className="text-blue-400" size={24} />
           </div>
-          <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+          <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">
             <span className="font-medium text-white/90">Steam</span>
             <span className="text-[10px] sm:text-xs text-white/50 whitespace-nowrap">{t('social.playing')}</span>
           </div>
         </a>
+      </motion.div>
+
+      {/* Coffee Donation Button at the bottom */}
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+        className="mt-16 flex justify-center"
+      >
+        <motion.a
+          href="https://coffeebede.com/rahnama"
+          target="_blank"
+          rel="noopener noreferrer"
+          title={t('contact.coffeeTooltip')}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-[#FFDD00]/30 text-white/90 hover:bg-[#FFDD00]/10 hover:border-[#FFDD00]/60 transition-all shadow-[0_0_20px_rgba(255,221,0,0.15)] hover:shadow-[0_0_35px_rgba(255,221,0,0.3)]"
+        >
+          <Coffee size={24} className="text-[#FFDD00]" />
+          <span className="font-semibold text-base">{t('contact.coffee')}</span>
+        </motion.a>
       </motion.div>
     </section>
   );

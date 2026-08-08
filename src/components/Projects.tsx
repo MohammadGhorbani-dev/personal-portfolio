@@ -20,29 +20,29 @@ const cardVariants = {
 };
 
 export default function Projects() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   const projects = [
     {
-      title: t('projects.p2.title'),
+      title: t('projects.p2.title'), // Farawin Messenger
       description: t('projects.p2.desc'),
       tags: ['React', 'REST API', 'Tailwind CSS'],
       gradient: 'from-emerald-500/20 to-teal-500/20',
-      image: '/p2.jpg',
+      image: '/p1.jpg',
       github: "https://github.com/MohammadGhorbani-dev/Farawin-messenger",
       live: "https://mohammadghorbani-dev.github.io/Farawin-messenger/"
     },
     {
-      title: t('projects.p4.title'),
+      title: t('projects.p4.title'), // TodoList
       description: t('projects.p4.desc'),
       tags: ['React', 'Context API', 'Tailwind CSS'],
       gradient: 'from-pink-500/20 to-indigo-500/20',
-      image: '/p4.jpg',
+      image: '/p2.jpg',
       github: "https://github.com/MohammadGhorbani-dev/TodoList",
       live: "https://mohammadghorbani-dev.github.io/TodoList/"
     },
     {
-      title: t('projects.p3.title'),
+      title: t('projects.p3.title'), // Contacts Manager
       description: t('projects.p3.desc'),
       tags: ['React', 'Axios', 'Material-UI', 'React Router'],
       gradient: 'from-orange-500/20 to-red-500/20',
@@ -51,11 +51,11 @@ export default function Projects() {
       live: "https://contact-manager.iran.liara.run/"
     },
     {
-      title: t('projects.p1.title'),
+      title: t('projects.p1.title'), // University portal
       description: t('projects.p1.desc'),
       tags: ['React', 'Vite', 'Firebase', 'Tailwind CSS'],
       gradient: 'from-blue-500/20 to-purple-500/20',
-      image: '/p1.jpg',
+      image: '/p4.jpg',
       github: "https://github.com/MohammadGhorbani-dev/university-student-portal",
       live: null
     }
@@ -70,7 +70,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-3xl md:text-4xl font-bold tracking-tight text-white/90 mb-4"
+          className={`text-3xl md:text-4xl font-bold text-white/90 mb-4 ${lang === 'en' ? 'tracking-tight' : ''}`}
         >
           {t('projects.title')}
         </motion.h2>
@@ -107,7 +107,7 @@ export default function Projects() {
 
             {/* Content Area */}
             <div className="flex flex-col flex-grow p-6 sm:p-8">
-              <h3 className="text-xl font-semibold text-white/90 mb-3 tracking-wide">{project.title}</h3>
+              <h3 className={`text-xl font-semibold text-white/90 mb-3 ${lang === 'en' ? 'tracking-wide' : ''}`}>{project.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
               
               {/* Tech Stack Tags */}

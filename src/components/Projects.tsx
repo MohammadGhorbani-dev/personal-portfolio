@@ -26,20 +26,26 @@ export default function Projects() {
     {
       title: t('projects.p1.title'),
       description: t('projects.p1.desc'),
-      tags: ['React', 'Firebase', 'Tailwind'],
+      tags: ['React', 'Vite', 'Firebase', 'Tailwind CSS'],
       gradient: 'from-blue-500/20 to-purple-500/20',
     },
     {
       title: t('projects.p2.title'),
       description: t('projects.p2.desc'),
-      tags: ['Next.js', 'TypeScript', 'Stripe'],
+      tags: ['React', 'REST API', 'Tailwind CSS'],
       gradient: 'from-emerald-500/20 to-teal-500/20',
     },
     {
       title: t('projects.p3.title'),
       description: t('projects.p3.desc'),
-      tags: ['Vue', 'Tailwind', 'OpenAI'],
+      tags: ['React', 'Axios', 'Material-UI', 'React Router'],
       gradient: 'from-orange-500/20 to-red-500/20',
+    },
+    {
+      title: t('projects.p4.title'),
+      description: t('projects.p4.desc'),
+      tags: ['React', 'Context API', 'Tailwind CSS'],
+      gradient: 'from-pink-500/20 to-indigo-500/20',
     }
   ];
 

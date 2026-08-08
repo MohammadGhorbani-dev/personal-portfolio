@@ -38,11 +38,11 @@ export default function Contact() {
           className="flex-1 rounded-3xl p-8 sm:p-10 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)] flex flex-col"
         >
           <form 
-            action="mailto:Jast.one.like@gmail.com"
+            action="https://api.web3forms.com/submit"
             method="POST"
-            encType="text/plain"
             className="flex flex-col gap-8 flex-grow"
           >
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE" />
             <div className="flex flex-col sm:flex-row gap-8">
               <div className="flex-1">
                 <input
@@ -108,15 +108,18 @@ export default function Contact() {
         className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
       >
         {/* LinkedIn */}
-        <a href="#" className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group">
+        <div className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 opacity-50 cursor-not-allowed group">
           <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">
             <Linkedin className="text-blue-400" size={24} />
           </div>
-          <span className="font-medium text-white/90">LinkedIn</span>
-        </a>
+          <div className="flex flex-col">
+            <span className="font-medium text-white/90">LinkedIn</span>
+            <span className="text-xs text-white/40">Coming Soon</span>
+          </div>
+        </div>
 
         {/* GitHub */}
-        <a href="#" className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group">
+        <a href="https://github.com/MohammadGhorbani-dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group">
           <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors">
             <Github className="text-white" size={24} />
           </div>
@@ -124,7 +127,7 @@ export default function Contact() {
         </a>
 
         {/* Spotify */}
-        <a href="#" className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#1DB954]/40 transition-all group">
+        <a href="https://open.spotify.com/user/31f3fkgfesvzseehg7hqxlsz3j4q?si=130b58e4b389409f" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#1DB954]/40 transition-all group">
           <div className="p-3 bg-[#1DB954]/10 rounded-2xl group-hover:bg-[#1DB954]/20 transition-colors">
             <Music className="text-[#1DB954]" size={24} />
           </div>
@@ -135,7 +138,7 @@ export default function Contact() {
         </a>
 
         {/* Steam Badge */}
-        <a href="#" className="relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all group">
+        <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all group">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors relative z-10">
             <Gamepad2 className="text-blue-400" size={24} />

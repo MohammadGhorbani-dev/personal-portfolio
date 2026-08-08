@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useLanguage } from '../context/LanguageContext';
 
 const skills = [
   'React', 'Vite', 'JavaScript', 'TypeScript', 'Firebase',
@@ -24,6 +25,8 @@ const badgeVariants = {
 };
 
 export default function Skills() {
+  const { t } = useLanguage();
+
   return (
     <section id="skills" className="relative z-10 w-full max-w-4xl mx-auto px-6 py-24">
       <div className="text-center mb-16">
@@ -34,7 +37,7 @@ export default function Skills() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-3xl md:text-4xl font-bold tracking-tight text-white/90 mb-4"
         >
-          Tech Arsenal
+          {t('skills.title')}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +46,7 @@ export default function Skills() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
           className="text-gray-400 text-lg max-w-2xl mx-auto"
         >
-          Tools and technologies I use to build modern digital experiences.
+          {t('skills.subtitle')}
         </motion.p>
       </div>
 

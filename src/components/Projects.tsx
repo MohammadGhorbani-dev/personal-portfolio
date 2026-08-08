@@ -1,26 +1,6 @@
 import { motion } from 'motion/react';
 import { Github, ExternalLink } from 'lucide-react';
-
-const projects = [
-  {
-    title: 'University Student Portal',
-    description: 'A comprehensive university management system with course selection, news, and room reservations.',
-    tags: ['React', 'Firebase', 'Tailwind'],
-    gradient: 'from-blue-500/20 to-purple-500/20',
-  },
-  {
-    title: 'E-Commerce Dashboard',
-    description: 'A modern merchant dashboard with real-time analytics, inventory management, and secure payments.',
-    tags: ['Next.js', 'TypeScript', 'Stripe'],
-    gradient: 'from-emerald-500/20 to-teal-500/20',
-  },
-  {
-    title: 'AI Content Generator',
-    description: 'An intelligent writing assistant that generates blog posts, social media copy, and SEO metadata.',
-    tags: ['Vue', 'Tailwind', 'OpenAI'],
-    gradient: 'from-orange-500/20 to-red-500/20',
-  }
-];
+import { useLanguage } from '../context/LanguageContext';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,6 +20,29 @@ const cardVariants = {
 };
 
 export default function Projects() {
+  const { t } = useLanguage();
+
+  const projects = [
+    {
+      title: t('projects.p1.title'),
+      description: t('projects.p1.desc'),
+      tags: ['React', 'Firebase', 'Tailwind'],
+      gradient: 'from-blue-500/20 to-purple-500/20',
+    },
+    {
+      title: t('projects.p2.title'),
+      description: t('projects.p2.desc'),
+      tags: ['Next.js', 'TypeScript', 'Stripe'],
+      gradient: 'from-emerald-500/20 to-teal-500/20',
+    },
+    {
+      title: t('projects.p3.title'),
+      description: t('projects.p3.desc'),
+      tags: ['Vue', 'Tailwind', 'OpenAI'],
+      gradient: 'from-orange-500/20 to-red-500/20',
+    }
+  ];
+
   return (
     <section id="projects" className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24">
       {/* Section Header */}
@@ -51,7 +54,7 @@ export default function Projects() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-3xl md:text-4xl font-bold tracking-tight text-white/90 mb-4"
         >
-          Selected Work
+          {t('projects.title')}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +63,7 @@ export default function Projects() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
           className="text-gray-400 text-lg max-w-2xl mx-auto"
         >
-          A showcase of my recent academic and freelance projects.
+          {t('projects.subtitle')}
         </motion.p>
       </div>
 
@@ -101,7 +104,7 @@ export default function Projects() {
               </div>
 
               {/* Footer */}
-              <div className="flex items-center gap-5 pt-5 border-t border-white/10 mt-auto">
+              <div className="flex items-center gap-5 pt-5 border-t border-white/10 mt-auto rtl:flex-row-reverse rtl:justify-end">
                 <a 
                   href="#" 
                   className="text-white/40 hover:text-white transition-colors duration-300"

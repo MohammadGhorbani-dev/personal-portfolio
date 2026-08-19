@@ -2,8 +2,6 @@
 
 A modern, highly interactive, and fully responsive personal portfolio website designed to showcase my projects, skills, and professional journey. Built with a focus on 3D animations, premium Glassmorphism aesthetics, and optimal performance.
 
-![Portfolio Preview](public/profile.jpg) <!-- You can replace this with a real screenshot of your website later -->
-
 ## 🌍 Live Demo
 **[mohammadghorbani-dev.ir](https://mohammadghorbani-dev.ir)**
 

@@ -26,7 +26,8 @@ If you'd like to clone and run this project on your local machine:
    ```bash
    git clone [https://github.com/MohammadGhorbani-dev/personal-portfolio.git](https://github.com/MohammadGhorbani-dev/personal-portfolio.git)
 
-   📬 Let's Connect
-Email: [mohamad.ghorbani.official@gmail.com]
+
+📬 Let's Connect
+Email: mohamad.ghorbani.official@gmail.com
 
 Designed & Built by Mohammad Ghorbani

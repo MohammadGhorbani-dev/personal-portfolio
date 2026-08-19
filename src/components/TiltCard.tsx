@@ -48,8 +48,9 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
+        WebkitTransform: 'translateZ(0)'
       }}
-      className={`relative rounded-3xl ${className}`}
+      className={`relative rounded-3xl transform-gpu will-change-transform ${className}`}
     >
       <motion.div
         className="absolute inset-0 z-[100] pointer-events-none rounded-[inherit]"

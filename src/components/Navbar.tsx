@@ -44,7 +44,8 @@ export default function Navbar() {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative flex items-center justify-between px-6 py-3 bg-black/40 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.6),_inset_0_1px_1px_rgba(255,255,255,0.2)] border border-white/10 border-t-white/20 rounded-full"
+        className="relative flex items-center justify-between px-6 py-3 bg-black/40 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.6),_inset_0_1px_1px_rgba(255,255,255,0.2)] border border-white/10 border-t-white/20 rounded-full transform-gpu will-change-transform"
+        style={{ WebkitTransform: 'translateZ(0)' }}
       >
         {/* Logo */}
         <div className={`text-white font-medium text-lg cursor-default whitespace-nowrap font-semibold ${lang === 'en' ? 'tracking-wide' : ''}`}>

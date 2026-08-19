@@ -91,8 +91,7 @@ export default function CanvasScrollBackground() {
     <div className="fixed inset-0 z-0 pointer-events-none bg-[#0a0a0a]">
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover opacity-80"
-        style={{ willChange: 'opacity, transform' }}
+        className="w-full h-full object-cover opacity-80 transform-gpu will-change-transform backface-visibility-hidden"
       />
     </div>
   );

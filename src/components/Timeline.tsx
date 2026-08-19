@@ -50,7 +50,7 @@ export default function Timeline() {
               {/* Timeline dot */}
               <div className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-400 ring-4 ring-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.8)] left-[8px] md:left-[24px] rtl:left-auto rtl:right-[8px] rtl:md:right-[24px] z-10`} />
               
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 sm:p-8 rounded-3xl hover:bg-white/10 hover:border-white/20 transition-all shadow-[0_4px_30px_rgba(0,0,0,0.1)] w-full group">
+              <div className="bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 p-6 sm:p-8 rounded-2xl hover:bg-white/10 transition-all w-full group">
                 <h3 className="text-xl font-bold text-white/90 mb-3 group-hover:text-blue-400 transition-colors">{node.title}</h3>
                 <p className="text-white/60 leading-relaxed text-sm md:text-base">
                   {node.desc}

@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Github, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { FaLaptopCode } from 'react-icons/fa';
+import TiltCard from './TiltCard';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -120,51 +121,58 @@ export default function Projects() {
           <motion.div
             key={index}
             variants={cardVariants}
-            whileHover={{ scale: 1.02 }}
-            className="group relative flex flex-col rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-white/30 hover:shadow-[0_8px_32px_rgba(255,255,255,0.05)]"
+            className="flex h-full"
           >
-            <ProjectImage src={project.image} alt={project.title} />
+            <TiltCard className="w-full h-full">
+              <div
+                className="group relative h-full flex flex-col bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-2xl overflow-hidden transition-all duration-500 hover:border-white/30 hover:shadow-[0_8px_32px_rgba(255,255,255,0.05)]"
+              >
+                <ProjectImage src={project.image} alt={project.title} />
 
-            {/* Content Area */}
-            <div className="flex flex-col flex-grow p-6 sm:p-8">
-              <h3 className={`text-xl font-semibold text-white/90 mb-3 ${lang === 'en' ? 'tracking-wide' : ''}`}>{project.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
-              
-              {/* Tech Stack Tags */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {project.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/70">
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                {/* Content Area */}
+                <div className="flex flex-col flex-grow p-6 sm:p-8">
+                  <h3 className={`text-xl font-semibold text-white/90 mb-3 ${lang === 'en' ? 'tracking-wide' : ''}`}>{project.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
+                  
+                  {/* Tech Stack Tags */}
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/70">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
-              {/* Footer */}
-              <div className="flex items-center gap-5 pt-5 border-t border-white/10 mt-auto rtl:flex-row-reverse rtl:justify-end">
-                {project.github && (
-                  <a 
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white/40 hover:text-white transition-colors duration-300"
-                    aria-label="View source on GitHub"
-                  >
-                    <Github size={20} strokeWidth={2} />
-                  </a>
-                )}
-                {project.live && (
-                  <a 
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white/40 hover:text-white transition-colors duration-300"
-                    aria-label="View live project"
-                  >
-                    <ExternalLink size={20} strokeWidth={2} />
-                  </a>
-                )}
+                  {/* Footer */}
+                  <div className="flex items-center gap-5 pt-5 border-t border-white/10 mt-auto rtl:flex-row-reverse rtl:justify-end">
+                    {project.github && (
+                      <a 
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/40 hover:text-white transition-colors duration-300 z-10"
+                        aria-label={t('projects.source')}
+                        title={t('projects.source')}
+                      >
+                        <Github size={20} strokeWidth={2} />
+                      </a>
+                    )}
+                    {project.live && (
+                      <a 
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/40 hover:text-white transition-colors duration-300 z-10"
+                        aria-label={t('projects.live')}
+                        title={t('projects.live')}
+                      >
+                        <ExternalLink size={20} strokeWidth={2} />
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
+            </TiltCard>
           </motion.div>
         ))}
       </motion.div>

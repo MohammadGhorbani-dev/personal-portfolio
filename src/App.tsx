@@ -6,8 +6,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Background from './components/Background';
+import CanvasScrollBackground from './components/CanvasScrollBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Timeline from './components/Timeline';
@@ -23,7 +25,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 2500);
 
     const handleLoad = () => {
       setIsLoading(false);
@@ -43,15 +45,21 @@ export default function App() {
       <AnimatePresence>
         {isLoading && <Preloader />}
       </AnimatePresence>
-      <div className="min-h-screen bg-[#0a0a0a] text-white font-sans relative overflow-x-hidden selection:bg-white/20 selection:text-white">
+      <div className="min-h-screen text-white font-sans relative overflow-x-hidden w-full max-w-[100vw] selection:bg-white/20 selection:text-white">
+        <CanvasScrollBackground />
         <Background />
-        <Navbar />
-        <Hero />
-        <Projects />
-        <Timeline />
-        <Skills />
-        <Contact />
-        <Footer />
+        
+        {/* Content Wrapper for Liquid Glass Overlay */}
+        <div className="relative z-10 w-full min-h-screen bg-gradient-to-b from-transparent to-[#0a0b10]">
+          <Navbar />
+          <Hero />
+          <AboutMe />
+          <Projects />
+          <Timeline />
+          <Skills />
+          <Contact />
+          <Footer />
+        </div>
       </div>
     </LanguageProvider>
   );

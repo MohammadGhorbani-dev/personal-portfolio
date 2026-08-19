@@ -82,7 +82,7 @@ export default function Skills() {
               borderColor: 'rgba(255,255,255,0.3)',
               backgroundColor: 'rgba(255,255,255,0.1)'
             }}
-            className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-white/80 font-medium transition-colors shadow-[0_4px_30px_rgba(0,0,0,0.1)] cursor-default"
+            className="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 border-t-white/20 shadow-[0_4px_15px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.15)] rounded-xl text-white/80 font-medium transition-colors cursor-default"
           >
             {skill.icon}
             <span>{skill.name}</span>

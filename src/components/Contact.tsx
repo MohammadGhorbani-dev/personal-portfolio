@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import React, { useState, useEffect } from 'react';
 import GitHubStats from './GitHubStats';
 import MagneticWrapper from './MagneticWrapper';
+import TiltCard from './TiltCard';
 
 export default function Contact() {
   const { lang, t } = useLanguage();
@@ -125,7 +126,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-[3] rounded-3xl p-8 sm:p-10 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)] flex flex-col"
+          className="flex-[3] p-8 sm:p-10 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-2xl flex flex-col"
         >
           <form 
             onSubmit={handleSubmit}
@@ -140,7 +141,7 @@ export default function Contact() {
                   placeholder={t('contact.name')}
                   onChange={() => setErrors(prev => ({ ...prev, name: '' }))}
                   disabled={cooldownLeft > 0 || isSubmitting}
-                  className="w-full bg-transparent border-b border-white/20 px-2 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/60 transition-colors rounded-none disabled:opacity-50"
+                  className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
                 />
                 {errors.name && <span className="text-red-400 text-xs mt-1 block px-2">{errors.name}</span>}
               </div>
@@ -151,7 +152,7 @@ export default function Contact() {
                   placeholder={t('contact.email')}
                   onChange={() => setErrors(prev => ({ ...prev, email: '' }))}
                   disabled={cooldownLeft > 0 || isSubmitting}
-                  className="w-full bg-transparent border-b border-white/20 px-2 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/60 transition-colors rounded-none disabled:opacity-50"
+                  className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
                 />
                 {errors.email && <span className="text-red-400 text-xs mt-1 block px-2">{errors.email}</span>}
               </div>
@@ -163,7 +164,7 @@ export default function Contact() {
                 rows={4}
                 onChange={() => setErrors(prev => ({ ...prev, message: '' }))}
                 disabled={cooldownLeft > 0 || isSubmitting}
-                className="w-full bg-transparent border-b border-white/20 px-2 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/60 transition-colors rounded-none resize-none disabled:opacity-50"
+                className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl resize-none disabled:opacity-50"
               ></textarea>
               {errors.message && <span className="text-red-400 text-xs mt-1 block px-2">{errors.message}</span>}
             </div>
@@ -174,7 +175,7 @@ export default function Contact() {
                 disabled={cooldownLeft > 0 || isSubmitting}
                 whileHover={cooldownLeft === 0 && !isSubmitting ? { scale: 1.02 } : {}}
                 whileTap={cooldownLeft === 0 && !isSubmitting ? { scale: 0.98 } : {}}
-                className="w-full px-8 py-4 rounded-full bg-white text-black font-medium transition-all hover:bg-white/90 shadow-[0_0_20px_rgba(255,255,255,0.15)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-8 py-4 rounded-full text-white font-medium transition-all bg-white/10 border border-white/20 border-t-white/30 shadow-[0_4px_15px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:bg-white/20 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.3)] active:translate-y-0.5 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)] active:border-t-white/10 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <span className="opacity-70">Sending...</span>
@@ -206,7 +207,9 @@ export default function Contact() {
         </motion.div>
 
         {/* GitHub Stats */}
-        <GitHubStats />
+        <TiltCard className="flex-[2] h-full">
+          <GitHubStats />
+        </TiltCard>
       </div>
 
       {/* Social & Gaming Showcase */}
@@ -219,69 +222,81 @@ export default function Contact() {
       >
         {/* LinkedIn */}
         <MagneticWrapper>
-          <div className="h-32 w-full flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 opacity-50 cursor-not-allowed group">
-            <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">
-              <Linkedin className="text-blue-400" size={24} />
+          <TiltCard className="h-full">
+            <div className="h-32 w-full flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl opacity-50 cursor-not-allowed group">
+              <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">
+                <Linkedin className="text-blue-400" size={24} />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-medium text-white/90">LinkedIn</span>
+                <span className="text-xs text-white/40">Coming Soon</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="font-medium text-white/90">LinkedIn</span>
-              <span className="text-xs text-white/40">Coming Soon</span>
-            </div>
-          </div>
+          </TiltCard>
         </MagneticWrapper>
 
         {/* GitHub */}
         <MagneticWrapper>
-          <a href="https://github.com/MohammadGhorbani-dev" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all group">
-            <div style={{ backgroundImage: "url('/assets/gifs/github.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
-            <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors relative z-10">
-              <Github className="text-white" size={24} />
-            </div>
-            <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">GitHub</span>
-          </a>
+          <TiltCard className="h-full">
+            <a href="https://github.com/MohammadGhorbani-dev" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+              <div style={{ backgroundImage: "url('/assets/gifs/github.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
+              <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors relative z-10 w-fit">
+                <Github className="text-white" size={24} />
+              </div>
+              <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] inline-block ml-4">GitHub</span>
+            </a>
+          </TiltCard>
         </MagneticWrapper>
 
         {/* Telegram */}
         <MagneticWrapper>
-          <a href="https://t.me/MrMGH_1999" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-400/40 transition-all group">
-            <div style={{ backgroundImage: "url('/assets/gifs/telegram.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
-            <div className="p-3 bg-blue-400/10 rounded-2xl group-hover:bg-blue-400/20 transition-colors relative z-10">
-              <Send className="text-blue-400" size={24} />
-            </div>
-            <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">{t('social.telegram')}</span>
-          </a>
+          <TiltCard className="h-full">
+            <a href="https://t.me/MrMGH_1999" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+              <div style={{ backgroundImage: "url('/assets/gifs/telegram.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
+              <div className="p-3 bg-blue-400/10 rounded-2xl group-hover:bg-blue-400/20 transition-colors relative z-10 w-fit">
+                <Send className="text-blue-400" size={24} />
+              </div>
+              <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] inline-block ml-4">{t('social.telegram')}</span>
+            </a>
+          </TiltCard>
         </MagneticWrapper>
 
         {/* Spotify */}
         <MagneticWrapper>
-          <a href="https://open.spotify.com/user/31f3fkgfesvzseehg7hqxlsz3j4q?si=130b58e4b389409f" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#1DB954]/40 transition-all group">
-            <div style={{ backgroundImage: "url('/assets/gifs/spotify.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
-            <div className="p-3 bg-[#1DB954]/10 rounded-2xl group-hover:bg-[#1DB954]/20 transition-colors relative z-10">
-              <Music className="text-[#1DB954]" size={24} />
-            </div>
-            <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">
-              <span className="font-medium text-white/90">Spotify</span>
-              <span className="text-xs text-white/40">Listen with me</span>
-            </div>
-          </a>
+          <TiltCard className="h-full">
+            <a href="https://open.spotify.com/user/31f3fkgfesvzseehg7hqxlsz3j4q?si=130b58e4b389409f" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+              <div style={{ backgroundImage: "url('/assets/gifs/spotify.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
+              <div className="p-3 bg-[#1DB954]/10 rounded-2xl group-hover:bg-[#1DB954]/20 transition-colors relative z-10 w-fit">
+                <Music className="text-[#1DB954]" size={24} />
+              </div>
+              <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] ml-4">
+                <span className="font-medium text-white/90">Spotify</span>
+                <span className="text-xs text-white/40">Vibing</span>
+              </div>
+            </a>
+          </TiltCard>
         </MagneticWrapper>
 
         {/* Steam Badge */}
         <MagneticWrapper className="col-span-2 md:col-span-4">
-          <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="h-36 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all group block">
-            <div style={{ backgroundImage: "url('/assets/gifs/steam.gif')", backgroundPosition: "50% 98%" }} className="absolute inset-0 bg-cover z-0"></div>
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
-            <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors relative z-10">
-              <Gamepad2 className="text-blue-400" size={24} />
-            </div>
-            <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">
-              <span className="font-medium text-white/90">Steam</span>
-              <span className="text-[10px] sm:text-xs text-white/50 whitespace-nowrap">{t('social.playing')}</span>
-            </div>
-          </a>
+          <TiltCard className="h-full">
+            <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="h-36 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+              <div style={{ backgroundImage: "url('/assets/gifs/steam.gif')", backgroundPosition: "50% 98%" }} className="absolute inset-0 bg-cover z-0"></div>
+              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
+              <div className="flex items-center gap-4 relative z-10">
+                <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">
+                  <Gamepad2 className="text-blue-400" size={24} />
+                </div>
+                <div className="flex flex-col [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">
+                  <span className="font-medium text-white/90">Steam</span>
+                  <span className="text-[10px] sm:text-xs text-white/50 whitespace-nowrap">{t('social.playing')}</span>
+                </div>
+              </div>
+            </a>
+          </TiltCard>
         </MagneticWrapper>
       </motion.div>
 

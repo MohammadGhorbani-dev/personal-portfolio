@@ -64,7 +64,7 @@ export default function GitHubStats() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-      className="flex-[2] rounded-3xl p-6 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)] flex flex-col justify-center items-center relative overflow-hidden group min-h-[250px]"
+      className="flex-[2] p-6 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl flex flex-col justify-center items-center relative overflow-hidden group min-h-[250px]"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-50 group-hover:opacity-100 transition-opacity"></div>
       

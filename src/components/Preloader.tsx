@@ -6,21 +6,13 @@ export default function Preloader() {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0a] backdrop-blur-3xl"
+      className="fixed inset-0 z-[9999] bg-[#0a0b10] flex items-center justify-center"
     >
       <div className="relative flex items-center justify-center">
-        {/* Outer glowing ring */}
         <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="absolute w-20 h-20 rounded-full border-t-2 border-b-2 border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
-        />
-        
-        {/* Inner pulsing orb */}
-        <motion.div
-          animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+          animate={{ opacity: [0.5, 1, 0.5], scale: [0.95, 1, 0.95] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-10 h-10 rounded-full bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.8)] blur-[2px]"
+          className="w-16 h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.1),_inset_0_1px_1px_rgba(255,255,255,0.2)]"
         />
       </div>
     </motion.div>

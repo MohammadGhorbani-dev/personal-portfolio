@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Coffee, Linkedin, Github, Music, Gamepad2, CheckCircle2, Send } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import GitHubStats from './GitHubStats';
 import MagneticWrapper from './MagneticWrapper';
 import TiltCard from './TiltCard';
@@ -10,36 +10,33 @@ export default function Contact() {
   const { lang, t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [cooldownLeft, setCooldownLeft] = useState(0);
   const [errors, setErrors] = useState({ name: '', email: '', message: '' });
 
+  const submitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const successTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   useEffect(() => {
-    const lastSubmit = localStorage.getItem('lastContactSubmit');
-    if (lastSubmit) {
-      const elapsed = Math.floor((Date.now() - parseInt(lastSubmit)) / 1000);
-      if (elapsed < 300) {
-        setCooldownLeft(300 - elapsed);
+    return () => {
+      if (submitTimerRef.current) {
+        clearTimeout(submitTimerRef.current);
+        submitTimerRef.current = null;
       }
-    }
+      if (successTimerRef.current) {
+        clearTimeout(successTimerRef.current);
+        successTimerRef.current = null;
+      }
+    };
   }, []);
 
-  useEffect(() => {
-    if (cooldownLeft > 0) {
-      const timer = setInterval(() => {
-        setCooldownLeft(prev => prev - 1);
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [cooldownLeft]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (cooldownLeft > 0) return;
+    if (isSubmitting) return;
 
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const message = formData.get('message') as string;
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = (formData.get('name') as string) || '';
+    const email = (formData.get('email') as string) || '';
+    const message = (formData.get('message') as string) || '';
 
     const newErrors = { name: '', email: '', message: '' };
     let hasError = false;
@@ -60,40 +57,30 @@ export default function Contact() {
     setErrors(newErrors);
     if (hasError) return;
 
-    setIsSubmitting(true);
-    const object = Object.fromEntries(formData.entries());
-    const json = JSON.stringify(object);
-
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: json
-      });
-      const data = await res.json();
-      
-      if (data.success) {
-        setIsSuccess(true);
-        const form = e.target as HTMLFormElement;
-        form.reset();
-        localStorage.setItem('lastContactSubmit', Date.now().toString());
-        setCooldownLeft(300);
-        setTimeout(() => setIsSuccess(false), 5000);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
+    // Clear any active notification timer so an older timer cannot prematurely dismiss a newer notification
+    if (successTimerRef.current) {
+      clearTimeout(successTimerRef.current);
+      successTimerRef.current = null;
     }
-  };
+    if (submitTimerRef.current) {
+      clearTimeout(submitTimerRef.current);
+      submitTimerRef.current = null;
+    }
 
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-    const s = (seconds % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
+    setIsSubmitting(true);
+    setIsSuccess(false);
+
+    submitTimerRef.current = setTimeout(() => {
+      form.reset();
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      submitTimerRef.current = null;
+
+      successTimerRef.current = setTimeout(() => {
+        setIsSuccess(false);
+        successTimerRef.current = null;
+      }, 5000);
+    }, 550);
   };
 
   return (
@@ -132,7 +119,6 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="flex flex-col gap-6 flex-grow"
           >
-            <input type="hidden" name="access_key" value="dc17bd35-b312-486d-959a-d781714a6400" />
             <div className="flex flex-col sm:flex-row gap-6">
               <div className="flex-1">
                 <input
@@ -140,7 +126,7 @@ export default function Contact() {
                   name="name"
                   placeholder={t('contact.name')}
                   onChange={() => setErrors(prev => ({ ...prev, name: '' }))}
-                  disabled={cooldownLeft > 0 || isSubmitting}
+                  disabled={isSubmitting}
                   className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
                 />
                 {errors.name && <span className="text-red-400 text-xs mt-1 block px-2">{errors.name}</span>}
@@ -151,7 +137,7 @@ export default function Contact() {
                   name="email"
                   placeholder={t('contact.email')}
                   onChange={() => setErrors(prev => ({ ...prev, email: '' }))}
-                  disabled={cooldownLeft > 0 || isSubmitting}
+                  disabled={isSubmitting}
                   className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
                 />
                 {errors.email && <span className="text-red-400 text-xs mt-1 block px-2">{errors.email}</span>}
@@ -163,44 +149,49 @@ export default function Contact() {
                 placeholder={t('contact.message')}
                 rows={4}
                 onChange={() => setErrors(prev => ({ ...prev, message: '' }))}
-                disabled={cooldownLeft > 0 || isSubmitting}
+                disabled={isSubmitting}
                 className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl resize-none disabled:opacity-50"
               ></textarea>
               {errors.message && <span className="text-red-400 text-xs mt-1 block px-2">{errors.message}</span>}
             </div>
             
-            <div className="mt-4 relative">
+            <div className="mt-4 flex flex-col items-center">
               <motion.button
                 type="submit"
-                disabled={cooldownLeft > 0 || isSubmitting}
-                whileHover={cooldownLeft === 0 && !isSubmitting ? { scale: 1.02 } : {}}
-                whileTap={cooldownLeft === 0 && !isSubmitting ? { scale: 0.98 } : {}}
+                disabled={isSubmitting}
+                whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                 className="w-full px-8 py-4 rounded-full text-white font-medium transition-all bg-white/10 border border-white/20 border-t-white/30 shadow-[0_4px_15px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:bg-white/20 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.3)] active:translate-y-0.5 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)] active:border-t-white/10 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
-                  <span className="opacity-70">Sending...</span>
-                ) : cooldownLeft > 0 ? (
-                  <span>Wait {formatTime(cooldownLeft)}</span>
+                  <span className="opacity-70">{t('contact.sending')}</span>
                 ) : (
                   t('contact.send')
                 )}
               </motion.button>
               
+              <p className="text-white/40 text-xs text-center mt-2.5">
+                {t('contact.demoNotice')}
+              </p>
+
               {isSuccess && (
                 <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute -bottom-10 left-0 right-0 text-center flex items-center justify-center gap-2 text-emerald-400 text-sm font-medium"
+                  className="mt-3 text-center flex items-center justify-center gap-2 text-emerald-400 text-sm font-medium"
                 >
                   <CheckCircle2 size={16} />
-                  Message sent successfully!
+                  <span>{t('contact.demoSuccess')}</span>
                 </motion.div>
               )}
             </div>
             
             <div className="mt-4 text-center">
               <p className="text-white/50 text-sm">
-                {t('contact.direct')} <a href="mailto:mohamad.ghorbani.official@gmail.com" className="text-white hover:underline transition-colors">mohamad.ghorbani.official@gmail.com</a>
+                {t('contact.direct')}{' '}
+                <span dir="ltr" className="text-white/80 font-mono text-xs select-all inline-block px-2 py-0.5 rounded bg-white/5 border border-white/10">
+                  {t('contact.demoEmail')}
+                </span>
               </p>
             </div>
           </form>
@@ -223,13 +214,13 @@ export default function Contact() {
         {/* LinkedIn */}
         <MagneticWrapper>
           <TiltCard className="h-full">
-            <div className="h-32 w-full flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl opacity-50 cursor-not-allowed group">
+            <div className="h-32 w-full flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
               <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">
                 <Linkedin className="text-blue-400" size={24} />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col ml-1 rtl:ml-0 rtl:mr-1">
                 <span className="font-medium text-white/90">LinkedIn</span>
-                <span className="text-xs text-white/40">Coming Soon</span>
+                <span className="text-xs text-white/50">{t('social.demoProfile')}</span>
               </div>
             </div>
           </TiltCard>
@@ -238,52 +229,58 @@ export default function Contact() {
         {/* GitHub */}
         <MagneticWrapper>
           <TiltCard className="h-full">
-            <a href="https://github.com/MohammadGhorbani-dev" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+            <div className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
               <div style={{ backgroundImage: "url('/assets/gifs/github.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors relative z-10 w-fit">
                 <Github className="text-white" size={24} />
               </div>
-              <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] inline-block ml-4">GitHub</span>
-            </a>
+              <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] ml-4 rtl:ml-0 rtl:mr-4">
+                <span className="font-medium text-white/90">GitHub</span>
+                <span className="text-xs text-white/50">{t('social.demoProfile')}</span>
+              </div>
+            </div>
           </TiltCard>
         </MagneticWrapper>
 
         {/* Telegram */}
         <MagneticWrapper>
           <TiltCard className="h-full">
-            <a href="https://t.me/MrMGH_1999" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+            <div className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
               <div style={{ backgroundImage: "url('/assets/gifs/telegram.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="p-3 bg-blue-400/10 rounded-2xl group-hover:bg-blue-400/20 transition-colors relative z-10 w-fit">
                 <Send className="text-blue-400" size={24} />
               </div>
-              <span className="font-medium text-white/90 relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] inline-block ml-4">{t('social.telegram')}</span>
-            </a>
+              <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] ml-4 rtl:ml-0 rtl:mr-4">
+                <span className="font-medium text-white/90">{t('social.telegram')}</span>
+                <span className="text-xs text-white/50">{t('social.demoProfile')}</span>
+              </div>
+            </div>
           </TiltCard>
         </MagneticWrapper>
 
         {/* Spotify */}
         <MagneticWrapper>
           <TiltCard className="h-full">
-            <a href="https://open.spotify.com/user/31f3fkgfesvzseehg7hqxlsz3j4q?si=130b58e4b389409f" target="_blank" rel="noopener noreferrer" className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+            <div className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
               <div style={{ backgroundImage: "url('/assets/gifs/spotify.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="p-3 bg-[#1DB954]/10 rounded-2xl group-hover:bg-[#1DB954]/20 transition-colors relative z-10 w-fit">
                 <Music className="text-[#1DB954]" size={24} />
               </div>
-              <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] ml-4">
+              <div className="flex flex-col relative z-10 [text-shadow:0_2px_4px_rgba(0,0,0,0.8)] ml-4 rtl:ml-0 rtl:mr-4">
                 <span className="font-medium text-white/90">Spotify</span>
-                <span className="text-xs text-white/40">Vibing</span>
+                <span className="text-xs text-white/40">{t('social.spotifyStatus')}</span>
               </div>
-            </a>
+            </div>
           </TiltCard>
         </MagneticWrapper>
 
         {/* Steam Badge */}
         <MagneticWrapper className="col-span-2 md:col-span-4">
           <TiltCard className="h-full">
-            <a href="https://steamcommunity.com/profiles/76561198839628975/" target="_blank" rel="noopener noreferrer" className="h-36 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group block">
+            <div className="h-36 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
               <div style={{ backgroundImage: "url('/assets/gifs/steam.gif')", backgroundPosition: "50% 98%" }} className="absolute inset-0 bg-cover z-0"></div>
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="flex items-center gap-4 relative z-10">
@@ -295,7 +292,7 @@ export default function Contact() {
                   <span className="text-[10px] sm:text-xs text-white/50 whitespace-nowrap">{t('social.playing')}</span>
                 </div>
               </div>
-            </a>
+            </div>
           </TiltCard>
         </MagneticWrapper>
       </motion.div>
@@ -309,18 +306,17 @@ export default function Contact() {
         className="mt-16 flex justify-center"
       >
         <MagneticWrapper>
-          <motion.a
-            href="https://coffeebede.com/rahnama"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.div
             title={t('contact.coffeeTooltip')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-[#FFDD00]/30 text-white/90 hover:bg-[#FFDD00]/10 hover:border-[#FFDD00]/60 transition-all shadow-[0_0_20px_rgba(255,221,0,0.15)] hover:shadow-[0_0_35px_rgba(255,221,0,0.3)] block"
+            whileHover={{ scale: 1.03 }}
+            className="flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-[#FFDD00]/30 text-white/90 hover:bg-[#FFDD00]/10 hover:border-[#FFDD00]/60 transition-all shadow-[0_0_20px_rgba(255,221,0,0.15)] hover:shadow-[0_0_35px_rgba(255,221,0,0.3)] cursor-default select-none"
           >
             <Coffee size={24} className="text-[#FFDD00]" />
             <span className="font-semibold text-base">{t('contact.coffee')}</span>
-          </motion.a>
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#FFDD00]/10 text-[#FFDD00] border border-[#FFDD00]/20 font-medium">
+              {t('contact.coffeeDemoTag')}
+            </span>
+          </motion.div>
         </MagneticWrapper>
       </motion.div>
     </section>

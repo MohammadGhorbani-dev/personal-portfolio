@@ -31,6 +31,10 @@ export default function CanvasScrollBackground() {
     
     // Handle resize to keep the canvas resolution sharp and covered
     const handleResize = () => {
+      if (canvasRef.current) {
+        canvasRef.current.width = window.innerWidth;
+        canvasRef.current.height = window.innerHeight;
+      }
       renderFrame(Math.min(
         FRAME_COUNT - 1,
         Math.max(0, Math.floor(scrollYProgress.get() * FRAME_COUNT))
@@ -54,9 +58,11 @@ export default function CanvasScrollBackground() {
     const img = imagesRef.current[index];
     if (!img || !img.complete) return;
 
-    // Match canvas internal resolution to display size for crispness
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Fallback dimension initialization if not yet set
+    if (canvas.width === 0 || canvas.height === 0) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
     // Object-cover calculation
     const canvasRatio = canvas.width / canvas.height;

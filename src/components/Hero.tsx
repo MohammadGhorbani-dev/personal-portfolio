@@ -69,7 +69,7 @@ export default function Hero() {
         }}
       >
         <motion.div variants={itemVariants} className="mb-6">
-          <img src="/profile.jpg" alt="Mohamad Ghorbani" className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.05)] mx-auto" />
+          <img src="/profile.jpg" alt="Alex Morgan — fictional portfolio character" className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.05)] mx-auto" />
         </motion.div>
 
         {/* Badge */}
@@ -119,8 +119,7 @@ export default function Hero() {
           <MagneticWrapper>
             <motion.a
               href="/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              download="Alex-Morgan-Sample-Resume.pdf"
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-white font-medium transition-all bg-white/10 border border-white/20 border-t-white/30 shadow-[0_4px_15px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:bg-white/20 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.3)] active:translate-y-0.5 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)] active:border-t-white/10"
             >
               <Download size={18} />

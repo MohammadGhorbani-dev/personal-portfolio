@@ -48,40 +48,32 @@ export default function Projects() {
 
   const projects = [
     {
-      title: t('projects.p2.title'), // Farawin Messenger
-      description: t('projects.p2.desc'),
-      tags: ['React', 'REST API', 'Tailwind CSS'],
-      gradient: 'from-emerald-500/20 to-teal-500/20',
-      image: '/p1.jpg',
-      github: "https://github.com/MohammadGhorbani-dev/Farawin-messenger",
-      live: null
-    },
-    {
-      title: t('projects.p4.title'), // TodoList
-      description: t('projects.p4.desc'),
-      tags: ['React', 'Context API', 'Tailwind CSS'],
-      gradient: 'from-pink-500/20 to-indigo-500/20',
-      image: '/p2.jpg',
-      github: "https://github.com/MohammadGhorbani-dev/TodoList",
-      live: "https://mohammadghorbani-dev.github.io/TodoList/"
-    },
-    {
-      title: t('projects.p3.title'), // Contacts Manager
-      description: t('projects.p3.desc'),
-      tags: ['React', 'Axios', 'Material-UI', 'React Router'],
-      gradient: 'from-orange-500/20 to-red-500/20',
-      image: '/p3.jpg',
-      github: "https://github.com/MohammadGhorbani-dev/Contacts-manager",
-      live: null
-    },
-    {
-      title: t('projects.p1.title'), // University portal
+      title: t('projects.p1.title'), // Nexus Dashboard
       description: t('projects.p1.desc'),
-      tags: ['React', 'Vite', 'Firebase', 'Tailwind CSS'],
+      tags: [t('projects.p1.category'), 'React', 'TypeScript', 'Tailwind CSS'],
       gradient: 'from-blue-500/20 to-purple-500/20',
-      image: '/p4.jpg',
-      github: "https://github.com/MohammadGhorbani-dev/university-student-portal",
-      live: null
+      image: '/p1.jpg'
+    },
+    {
+      title: t('projects.p2.title'), // Pulse Chat
+      description: t('projects.p2.desc'),
+      tags: [t('projects.p2.category'), 'React', 'Tailwind CSS'],
+      gradient: 'from-emerald-500/20 to-teal-500/20',
+      image: '/p2.jpg'
+    },
+    {
+      title: t('projects.p3.title'), // Orbit Contacts
+      description: t('projects.p3.desc'),
+      tags: [t('projects.p3.category'), 'React', 'TypeScript'],
+      gradient: 'from-orange-500/20 to-red-500/20',
+      image: '/p3.jpg'
+    },
+    {
+      title: t('projects.p4.title'), // Flow Tasks
+      description: t('projects.p4.desc'),
+      tags: [t('projects.p4.category'), 'React', 'Tailwind CSS'],
+      gradient: 'from-pink-500/20 to-indigo-500/20',
+      image: '/p4.jpg'
     }
   ];
 
@@ -143,32 +135,33 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  {/* Footer */}
-                  <div className="flex items-center gap-5 pt-5 border-t border-white/10 mt-auto rtl:flex-row-reverse rtl:justify-end">
-                    {project.github && (
-                      <a 
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/40 hover:text-white transition-colors duration-300 z-10"
-                        aria-label={t('projects.source')}
-                        title={t('projects.source')}
+                  {/* Non-interactive demo indicators */}
+                  <div className="flex items-center justify-between pt-5 border-t border-white/10 mt-auto rtl:flex-row-reverse">
+                    <div className="flex items-center gap-4 text-white/40">
+                      <span 
+                        className="inline-flex items-center gap-1.5 text-xs text-white/40 cursor-default select-none"
+                        title={t('projects.demoCodeNotice')}
+                        aria-label={t('projects.demoCodeNotice')}
                       >
-                        <Github size={20} strokeWidth={2} />
-                      </a>
-                    )}
-                    {project.live && (
-                      <a 
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/40 hover:text-white transition-colors duration-300 z-10"
-                        aria-label={t('projects.live')}
-                        title={t('projects.live')}
+                        <Github size={18} strokeWidth={2} className="opacity-50" aria-hidden="true" />
+                        <span className="text-[11px] text-white/40">{t('projects.demoCode')}</span>
+                      </span>
+                      <span 
+                        className="inline-flex items-center gap-1.5 text-xs text-white/40 cursor-default select-none"
+                        title={t('projects.demoLiveNotice')}
+                        aria-label={t('projects.demoLiveNotice')}
                       >
-                        <ExternalLink size={20} strokeWidth={2} />
-                      </a>
-                    )}
+                        <ExternalLink size={18} strokeWidth={2} className="opacity-50" aria-hidden="true" />
+                        <span className="text-[11px] text-white/40">{t('projects.demoLive')}</span>
+                      </span>
+                    </div>
+                    <span 
+                      className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/50 cursor-default select-none"
+                      role="status"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80" aria-hidden="true" />
+                      {t('projects.demoBadge')}
+                    </span>
                   </div>
                 </div>
               </div>

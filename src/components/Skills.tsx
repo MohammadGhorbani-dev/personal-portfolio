@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { useLanguage } from '../context/LanguageContext';
-import { FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaFigma, FaRobot, FaEnvelope } from "react-icons/fa";
+import { FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaFigma } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiJavascript, SiRedux, SiMui, SiTailwindcss, SiCplusplus, SiVite, SiFirebase, SiFramer } from "react-icons/si";
 
 const skills = [
@@ -17,9 +17,7 @@ const skills = [
   { name: 'Git', icon: <FaGitAlt color="#F05032" size={20} /> },
   { name: 'Figma', icon: <FaFigma color="#F24E1E" size={20} /> },
   { name: 'Firebase', icon: <SiFirebase color="#FFCA28" size={20} /> },
-  { name: 'Framer Motion', icon: <SiFramer color="#0055FF" size={20} /> },
-  { name: 'AI Studio', icon: <FaRobot color="#A855F7" size={20} /> },
-  { name: 'Web3Forms', icon: <FaEnvelope color="#3B82F6" size={20} /> }
+  { name: 'Framer Motion', icon: <SiFramer color="#0055FF" size={20} /> }
 ];
 
 const containerVariants = {

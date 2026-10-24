@@ -4,7 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { key: 'nav.home', href: '#' },
+  { key: 'nav.home', href: '#home' },
   { key: 'nav.projects', href: '#projects' },
   { key: 'nav.journey', href: '#journey' },
   { key: 'nav.skills', href: '#skills' },
@@ -56,7 +56,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 md:gap-4 mis-auto">
           <ul className="hidden md:flex items-center gap-1">
             {navLinks.map((link, index) => {
-              const sectionId = link.href === '#' ? 'home' : link.href.substring(1);
+              const sectionId = link.href === '#' || link.href === '#home' ? 'home' : link.href.substring(1);
               const isActive = activeSection === sectionId;
               
               return (
@@ -91,14 +91,17 @@ export default function Navbar() {
           <div className="flex items-center gap-2 md:gap-4 md:border-is border-white/10 md:pis-4">
             <button
               onClick={toggleLang}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white border border-white/5 ${lang === 'en' ? 'tracking-wider' : ''}`}
+              aria-label={lang === 'en' ? 'تغییر زبان به فارسی' : 'Switch language to English'}
+              className={`px-3 py-1.5 text-xs font-semibold rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white border border-white/5 min-h-[36px] min-w-[44px] flex items-center justify-center ${lang === 'en' ? 'tracking-wider' : ''}`}
             >
               {lang === 'en' ? 'FA' : 'EN'}
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-1.5 text-white/80 hover:text-white bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-colors"
-              aria-label="Toggle Menu"
+              className="md:hidden p-2.5 text-white/80 hover:text-white bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label={isMobileMenuOpen ? (lang === 'en' ? 'Close navigation menu' : 'بستن منوی ناوبری') : (lang === 'en' ? 'Open navigation menu' : 'باز کردن منوی ناوبری')}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav-menu"
             >
               {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -109,6 +112,9 @@ export default function Navbar() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
+              id="mobile-nav-menu"
+              role="region"
+              aria-label={lang === 'en' ? 'Mobile Navigation' : 'ناوبری موبایل'}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -116,7 +122,7 @@ export default function Navbar() {
               className="absolute top-full left-0 right-0 mt-4 p-4 bg-[#0a0b10]/95 backdrop-blur-3xl rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col gap-4 md:hidden overflow-hidden z-[999]"
             >
               {navLinks.map((link) => {
-                const sectionId = link.href === '#' ? 'home' : link.href.substring(1);
+                const sectionId = link.href === '#' || link.href === '#home' ? 'home' : link.href.substring(1);
                 const isActive = activeSection === sectionId;
                 
                 return (

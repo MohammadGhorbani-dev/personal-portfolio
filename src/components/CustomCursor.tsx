@@ -13,12 +13,34 @@ export default function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Only show custom cursor on desktop
-    const checkDesktop = () => setIsDesktop(window.innerWidth >= 768);
-    checkDesktop();
-    window.addEventListener('resize', checkDesktop);
+    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
 
-    return () => window.removeEventListener('resize', checkDesktop);
+    const updateCursorState = () => {
+      const matches = mediaQuery.matches;
+      setIsDesktop(matches);
+      if (matches) {
+        document.body.classList.add('custom-cursor-active');
+      } else {
+        document.body.classList.remove('custom-cursor-active');
+      }
+    };
+
+    updateCursorState();
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', updateCursorState);
+    } else {
+      mediaQuery.addListener(updateCursorState);
+    }
+
+    return () => {
+      document.body.classList.remove('custom-cursor-active');
+      if (typeof mediaQuery.removeEventListener === 'function') {
+        mediaQuery.removeEventListener('change', updateCursorState);
+      } else {
+        mediaQuery.removeListener(updateCursorState);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -30,7 +52,8 @@ export default function CustomCursor() {
     };
 
     const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
       // Elements that should trigger hover state
       if (
         target.tagName.toLowerCase() === 'a' ||

@@ -23,26 +23,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let scrollTimeout: ReturnType<typeof setTimeout>;
-    
-    const handleScroll = () => {
-      document.body.classList.add('pointer-events-none');
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        document.body.classList.remove('pointer-events-none');
-      }, 150);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
-      document.body.classList.remove('pointer-events-none');
-    };
-  }, []);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2500);

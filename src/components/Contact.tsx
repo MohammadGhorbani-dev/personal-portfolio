@@ -121,38 +121,68 @@ export default function Contact() {
           >
             <div className="flex flex-col sm:flex-row gap-6">
               <div className="flex-1">
+                <label htmlFor="contact-name" className="sr-only">
+                  {t('contact.name')}
+                </label>
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
                   placeholder={t('contact.name')}
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'contact-name-error' : undefined}
                   onChange={() => setErrors(prev => ({ ...prev, name: '' }))}
                   disabled={isSubmitting}
-                  className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
+                  className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] focus-visible:ring-1 focus-visible:ring-blue-400/50 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
                 />
-                {errors.name && <span className="text-red-400 text-xs mt-1 block px-2">{errors.name}</span>}
+                {errors.name && (
+                  <span id="contact-name-error" role="alert" className="text-red-400 text-xs mt-1 block px-2">
+                    {errors.name}
+                  </span>
+                )}
               </div>
               <div className="flex-1">
+                <label htmlFor="contact-email" className="sr-only">
+                  {t('contact.email')}
+                </label>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
                   placeholder={t('contact.email')}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'contact-email-error' : undefined}
                   onChange={() => setErrors(prev => ({ ...prev, email: '' }))}
                   disabled={isSubmitting}
-                  className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
+                  className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] focus-visible:ring-1 focus-visible:ring-blue-400/50 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl disabled:opacity-50"
                 />
-                {errors.email && <span className="text-red-400 text-xs mt-1 block px-2">{errors.email}</span>}
+                {errors.email && (
+                  <span id="contact-email-error" role="alert" className="text-red-400 text-xs mt-1 block px-2">
+                    {errors.email}
+                  </span>
+                )}
               </div>
             </div>
             <div>
+              <label htmlFor="contact-message" className="sr-only">
+                {t('contact.message')}
+              </label>
               <textarea
+                id="contact-message"
                 name="message"
                 placeholder={t('contact.message')}
                 rows={4}
+                aria-invalid={Boolean(errors.message)}
+                aria-describedby={errors.message ? 'contact-message-error' : undefined}
                 onChange={() => setErrors(prev => ({ ...prev, message: '' }))}
                 disabled={isSubmitting}
-                className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl resize-none disabled:opacity-50"
+                className="w-full bg-black/20 border border-white/5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),_0_0_10px_rgba(59,130,246,0.3)] focus-visible:ring-1 focus-visible:ring-blue-400/50 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/20 transition-all rounded-xl resize-none disabled:opacity-50"
               ></textarea>
-              {errors.message && <span className="text-red-400 text-xs mt-1 block px-2">{errors.message}</span>}
+              {errors.message && (
+                <span id="contact-message-error" role="alert" className="text-red-400 text-xs mt-1 block px-2">
+                  {errors.message}
+                </span>
+              )}
             </div>
             
             <div className="mt-4 flex flex-col items-center">
@@ -164,7 +194,7 @@ export default function Contact() {
                 className="w-full px-8 py-4 rounded-full text-white font-medium transition-all bg-white/10 border border-white/20 border-t-white/30 shadow-[0_4px_15px_rgba(0,0,0,0.3),_inset_0_1px_1px_rgba(255,255,255,0.2)] hover:bg-white/20 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.4),_inset_0_1px_1px_rgba(255,255,255,0.3)] active:translate-y-0.5 active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)] active:border-t-white/10 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
-                  <span className="opacity-70">{t('contact.sending')}</span>
+                  <span className="opacity-70" role="status" aria-live="polite">{t('contact.sending')}</span>
                 ) : (
                   t('contact.send')
                 )}
@@ -176,6 +206,8 @@ export default function Contact() {
 
               {isSuccess && (
                 <motion.div 
+                  role="status"
+                  aria-live="polite"
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="mt-3 text-center flex items-center justify-center gap-2 text-emerald-400 text-sm font-medium"

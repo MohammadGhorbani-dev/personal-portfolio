@@ -1,88 +1,91 @@
 # Interactive Developer Portfolio — Fictional Demo
 
-An interactive, bilingual (English & Persian) developer portfolio built with React 19, TypeScript, Vite, Tailwind CSS v4, and Motion.
+A bilingual, interactive developer portfolio built with **React 19, TypeScript, Vite, Tailwind CSS v4, and Motion**. The project focuses on polished frontend presentation, responsive layouts, and scroll-driven animation.
 
-This project is created by **Mohammad Ghorbani** as a showcase of modern frontend engineering, animation craftsmanship, and responsive interface design.
+**[Live Demo](https://personal-portfolio-4ch.pages.dev/)** · **[Source Code](https://github.com/MohammadGhorbani-dev/personal-portfolio)**
 
-> **Note on Portfolio Persona**:  
-> **Alex Morgan** is a fictional character identity created exclusively for this portfolio demonstration. Alex Morgan is not the actual creator or owner of this software project.
+> **About this demo:** This website was created by **Mohammad Ghorbani**. **Alex Morgan** is a fictional portfolio persona—not the developer or owner of the project. The biography, career history, project concepts, GitHub-style statistics, social profiles, and downloadable resume are sample content created for demonstration.
 
----
+## Highlights
 
-## Features
+- **English and Persian:** Language switching with left-to-right (LTR) and right-to-left (RTL) layouts.
+- **Scroll-driven animation:** A 150-frame image sequence rendered on HTML Canvas and linked to scroll progress.
+- **Interactive UI:** Glassmorphism panels, animated transitions, magnetic buttons, tilt effects, and a custom desktop cursor.
+- **Responsive design:** Layouts adapted for desktop and mobile devices.
+- **Fictional project gallery:** Four conceptual UI showcases—Nexus Dashboard, Pulse Chat, Orbit Contacts, and Flow Tasks.
+- **Demo-only interactions:** The contact form validates input locally but **does not send or store messages**. Social profile cards and GitHub-style statistics are illustrative rather than connected to real accounts.
+- **Sample resume:** A downloadable fictional CV is included to demonstrate the portfolio's download flow.
 
-- **Bilingual Interface**: Native support for English (LTR) and Persian (RTL) with localized typography and bidirectional layout adaptations.
-- **Scroll-Driven Canvas Animation**: High-performance 2D Canvas sequence driven by viewport scroll progress.
-- **Micro-Interactions & Physics**: Magnetic wrappers, 3D tilt cards, and cursor effects powered by Motion springs.
-- **Liquid Glass Aesthetic**: Translucent frosted panels, backdrop blur filters, and restrained dark-canvas styling.
-- **Simulated Demo Mode**: The contact form and statistics operate entirely on the client side with zero external network requests, data tracking, or backend telemetry.
-- **Accessible & Responsive**: Fully responsive layout with keyboard accessibility, ARIA labels, live status announcements, and touch-aware pointer handling.
+## Tech Stack
 
----
+| Area | Technology |
+| --- | --- |
+| UI | React 19, TypeScript |
+| Tooling | Vite |
+| Styling | Tailwind CSS v4 |
+| Animation | Motion, HTML Canvas |
+| Icons | Lucide React, React Icons |
+| Hosting | Cloudflare Pages |
 
-## Technology Stack
+## Getting Started
 
-- **Core**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
-- **Bundler**: [Vite](https://vite.dev/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animation**: [Motion](https://motion.dev/)
-- **Icons**: [Lucide React](https://lucide.dev/)
+### Requirements
 
----
+- Node.js 20 or newer is recommended.
+- npm
 
-## Local Development & Setup
+### Run locally
 
-### Prerequisites
+```bash
+git clone https://github.com/MohammadGhorbani-dev/personal-portfolio.git
+cd personal-portfolio
+npm install
+npm run dev
+```
 
-- Node.js (v18.0.0 or higher recommended)
-- npm or compatible package manager
+The development server is configured to run at **http://localhost:3000**.
 
-### Installation
+### Available commands
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/MohammadGhorbani-dev/personal-portfolio.git
-   cd personal-portfolio
-   ```
+```bash
+npm run dev      # Start the development server
+npm run lint     # Run TypeScript type checking (tsc --noEmit)
+npm run build    # Generate the production build in dist/
+npm run preview  # Preview the production build locally
+```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## Project Files
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   Open your browser and navigate to `http://localhost:3000`.
+```text
+src/
+  components/       React UI components and animations
+  context/          English/Persian translations and language state
+public/
+  profile.jpg        Fictional persona portrait
+  p1.jpg - p4.jpg   Concept project images
+  cv.pdf             Fictional sample resume
+  frames/            150 JPEG frames for the scroll animation
+  assets/gifs/       Animated imagery for social showcase cards
+```
 
-### Available Scripts
+The assets under `public/` are required for the complete visual experience. The mock project images are **concept illustrations**, not proof of separately deployed applications.
 
-- `npm run dev` — Starts the Vite development server on port 3000.
-- `npm run build` — Compiles TypeScript and creates an optimized production bundle in `dist/`.
-- `npm run preview` — Locally previews the production build.
-- `npm run lint` — Runs TypeScript type-checking (`tsc --noEmit`).
+## Deployment
 
----
+The live demo is deployed on **Cloudflare Pages** from the GitHub repository.
 
-## Assets & Structure
+| Setting | Value |
+| --- | --- |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Output directory | `dist` |
 
-- `public/profile.jpg` — Fictional avatar image.
-- `public/cv.pdf` — Sample resume asset for demo download (`Alex-Morgan-Sample-Resume.pdf`).
-- `public/p1.jpg` – `public/p4.jpg` — Project showcase imagery.
-- `public/frames/` — 100-frame image sequence for the scroll-driven background animation.
-- `public/assets/gifs/` — Social media card background animations.
+The current demo does not require backend credentials or environment variables for its contact form and sample statistics.
 
----
+## Credits and Scope
 
-## Links & Attribution
+**Created and maintained by [Mohammad Ghorbani](https://github.com/MohammadGhorbani-dev).**
 
-- **Creator & Developer**: [Mohammad Ghorbani](https://github.com/MohammadGhorbani-dev)
-- **Source Repository**: [https://github.com/MohammadGhorbani-dev/personal-portfolio](https://github.com/MohammadGhorbani-dev/personal-portfolio)
-- **Live Demo**: `https://your-domain-or-deployment-url.app` (Placeholder)
+This repository demonstrates a **portfolio frontend**, not production implementations of the fictional messaging, analytics, contacts, or productivity products featured in its cards. No live social accounts or payment services are connected to the demo showcase.
 
----
-
-## License
-
-This project is open-source under the Apache-2.0 License.
+No open-source license is currently included in this repository. Public access to the source does not, by itself, grant permission to reuse or redistribute the code or assets.

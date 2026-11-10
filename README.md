@@ -2,7 +2,7 @@
 
 A bilingual, interactive developer portfolio built with **React 19, TypeScript, Vite, Tailwind CSS v4, and Motion**. The project focuses on polished frontend presentation, responsive layouts, and scroll-driven animation.
 
-**[Live Demo](https://personal-portfolio-4ch.pages.dev/)** · **[Source Code](https://github.com/MohammadGhorbani-dev/personal-portfolio)**
+**[Live Demo](https://portfolio-demo.mohammadghorbani-dev.ir/)** · **[Source Code](https://github.com/MohammadGhorbani-dev/personal-portfolio)**
 
 > **About this demo:** This website was created by **Mohammad Ghorbani**. **Alex Morgan** is a fictional portfolio persona—not the developer or owner of the project. The biography, career history, project concepts, GitHub-style statistics, social profiles, and downloadable resume are sample content created for demonstration.
 

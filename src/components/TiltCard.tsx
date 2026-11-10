@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from 'motion/react';
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion } from 'motion/react';
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -7,6 +7,7 @@ interface TiltCardProps {
 }
 
 export default function TiltCard({ children, className = "" }: TiltCardProps) {
+  const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   
   const x = useMotionValue(0.5);
@@ -42,7 +43,7 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
   return (
     <motion.div
       ref={ref}
-      onMouseMove={handleMouseMove}
+      onMouseMove={reduceMotion ? undefined : handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         rotateX,

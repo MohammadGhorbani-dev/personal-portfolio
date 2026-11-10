@@ -37,6 +37,8 @@ function ProjectImage({ src, alt }: { src: string, alt: string }) {
     <img 
       src={src} 
       alt={alt} 
+      loading="lazy"
+      decoding="async"
       onError={() => setHasError(true)}
       className="w-full h-48 object-cover rounded-t-2xl" 
     />

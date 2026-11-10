@@ -6,7 +6,7 @@ import GitHubStats from './GitHubStats';
 import MagneticWrapper from './MagneticWrapper';
 import TiltCard from './TiltCard';
 
-export default function Contact() {
+export default function Contact({ reduceMotion }: { reduceMotion: boolean }) {
   const { lang, t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -262,7 +262,7 @@ export default function Contact() {
         <MagneticWrapper>
           <TiltCard className="h-full">
             <div className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
-              <div style={{ backgroundImage: "url('/assets/gifs/github.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+              {!reduceMotion && <img src="/assets/gifs/github.gif" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />}
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors relative z-10 w-fit">
                 <Github className="text-white" size={24} />
@@ -279,7 +279,7 @@ export default function Contact() {
         <MagneticWrapper>
           <TiltCard className="h-full">
             <div className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
-              <div style={{ backgroundImage: "url('/assets/gifs/telegram.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+              {!reduceMotion && <img src="/assets/gifs/telegram.gif" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />}
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="p-3 bg-blue-400/10 rounded-2xl group-hover:bg-blue-400/20 transition-colors relative z-10 w-fit">
                 <Send className="text-blue-400" size={24} />
@@ -296,7 +296,7 @@ export default function Contact() {
         <MagneticWrapper>
           <TiltCard className="h-full">
             <div className="h-32 w-full relative overflow-hidden flex items-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
-              <div style={{ backgroundImage: "url('/assets/gifs/spotify.gif')" }} className="absolute inset-0 bg-cover bg-center z-0"></div>
+              {!reduceMotion && <img src="/assets/gifs/spotify.gif" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />}
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="p-3 bg-[#1DB954]/10 rounded-2xl group-hover:bg-[#1DB954]/20 transition-colors relative z-10 w-fit">
                 <Music className="text-[#1DB954]" size={24} />
@@ -313,7 +313,7 @@ export default function Contact() {
         <MagneticWrapper className="col-span-2 md:col-span-4">
           <TiltCard className="h-full">
             <div className="h-36 w-full relative overflow-hidden flex items-center justify-center gap-4 p-5 bg-white/5 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),_inset_0_1px_1px_rgba(255,255,255,0.15)] border border-white/10 border-t-white/20 border-l-white/20 rounded-3xl hover:bg-white/10 transition-all group cursor-default select-none">
-              <div style={{ backgroundImage: "url('/assets/gifs/steam.gif')", backgroundPosition: "50% 98%" }} className="absolute inset-0 bg-cover z-0"></div>
+              {!reduceMotion && <img src="/assets/gifs/steam.gif" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover object-[50%_98%]" />}
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/30 transition-colors duration-300 z-0"></div>
               <div className="flex items-center gap-4 relative z-10">
                 <div className="p-3 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">

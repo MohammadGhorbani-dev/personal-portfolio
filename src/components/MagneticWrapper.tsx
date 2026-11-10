@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 
 interface MagneticWrapperProps {
   children: React.ReactNode;
@@ -8,6 +8,7 @@ interface MagneticWrapperProps {
 }
 
 export default function MagneticWrapper({ children, className = "", strength = 15 }: MagneticWrapperProps) {
+  const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -33,7 +34,7 @@ export default function MagneticWrapper({ children, className = "", strength = 1
   return (
     <motion.div
       ref={ref}
-      onMouseMove={handleMouse}
+      onMouseMove={reduceMotion ? undefined : handleMouse}
       onMouseLeave={reset}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}

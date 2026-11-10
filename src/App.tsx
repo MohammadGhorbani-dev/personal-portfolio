@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { AnimatePresence, MotionConfig, useReducedMotion } from 'motion/react';
 import Background from './components/Background';
 import CanvasScrollBackground from './components/CanvasScrollBackground';
 import Navbar from './components/Navbar';
@@ -20,6 +20,7 @@ import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 
 export default function App() {
+  const reduceMotion = useReducedMotion() === true;
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -40,27 +41,29 @@ export default function App() {
   }, []);
 
   return (
-    <LanguageProvider>
-      <CustomCursor />
-      <AnimatePresence>
-        {isLoading && <Preloader />}
-      </AnimatePresence>
-      <div className="min-h-screen text-white font-sans relative overflow-x-hidden w-full max-w-[100vw] selection:bg-white/20 selection:text-white">
-        <CanvasScrollBackground />
-        <Background />
-        
-        {/* Content Wrapper for Liquid Glass Overlay */}
-        <div className="relative z-10 w-full min-h-screen bg-gradient-to-b from-transparent to-[#0a0b10]">
-          <Navbar />
-          <Hero />
-          <AboutMe />
-          <Projects />
-          <Timeline />
-          <Skills />
-          <Contact />
-          <Footer />
+    <MotionConfig reducedMotion="user">
+      <LanguageProvider>
+        {!reduceMotion && <CustomCursor />}
+        <AnimatePresence>
+          {isLoading && !reduceMotion && <Preloader />}
+        </AnimatePresence>
+        <div className="min-h-screen text-white font-sans relative overflow-x-hidden w-full max-w-[100vw] selection:bg-white/20 selection:text-white">
+          <CanvasScrollBackground animate={!reduceMotion} />
+          {!reduceMotion && <Background />}
+
+          {/* Content Wrapper for Liquid Glass Overlay */}
+          <div className="relative z-10 w-full min-h-screen bg-gradient-to-b from-transparent to-[#0a0b10]">
+            <Navbar />
+            <Hero reduceMotion={reduceMotion} />
+            <AboutMe />
+            <Projects />
+            <Timeline />
+            <Skills />
+            <Contact reduceMotion={reduceMotion} />
+            <Footer />
+          </div>
         </div>
-      </div>
-    </LanguageProvider>
+      </LanguageProvider>
+    </MotionConfig>
   );
 }

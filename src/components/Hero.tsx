@@ -28,7 +28,7 @@ const itemVariants = {
   },
 };
 
-export default function Hero() {
+export default function Hero({ reduceMotion }: { reduceMotion: boolean }) {
   const { lang, t } = useLanguage();
   const [greeting, setGreeting] = useState('');
   const [emoji, setEmoji] = useState('');
@@ -59,17 +59,17 @@ export default function Hero() {
     <main id="home" className="min-h-[100dvh] flex flex-col items-center relative z-10 w-full pt-24 pb-8 px-6" style={{ perspective: "1000px" }}>
       <motion.section
         variants={containerVariants}
-        initial="hidden"
+        initial={reduceMotion ? false : 'hidden'}
         animate="visible"
         className="flex-1 flex flex-col items-center justify-center gap-6 md:gap-8 w-full max-w-3xl mx-auto text-center origin-top"
-        style={{
+        style={reduceMotion ? undefined : {
           opacity: heroOpacity,
           scale: heroScale,
           rotateX: heroRotateX
         }}
       >
         <motion.div variants={itemVariants} className="mb-6">
-          <img src="/profile.jpg" alt="Alex Morgan — fictional portfolio character" className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.05)] mx-auto" />
+          <img src="/profile.jpg" alt={t('hero.portraitAlt')} decoding="async" className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.05)] mx-auto" />
         </motion.div>
 
         {/* Badge */}
@@ -87,6 +87,8 @@ export default function Hero() {
         >
           {t('hero.title')}
         </motion.h1>
+
+        <p className="text-sm font-medium text-white/80">{t('hero.disclosure')}</p>
 
         {/* Sub-headline */}
         <motion.h2 
@@ -131,12 +133,12 @@ export default function Hero() {
 
       {/* Animated Scroll Indicator */}
       <motion.div 
-        style={{ opacity: heroOpacity }}
+        style={reduceMotion ? undefined : { opacity: heroOpacity }}
         className="mt-auto pt-8 flex flex-col items-center gap-3 z-20 pointer-events-none"
       >
         <div className="w-7 h-12 rounded-full border border-white/20 flex justify-center p-1.5 bg-white/5 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
           <motion.div 
-            animate={{ y: [0, 16, 0] }}
+            animate={reduceMotion ? undefined : { y: [0, 16, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             className="w-1.5 h-2.5 bg-white/80 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
           />

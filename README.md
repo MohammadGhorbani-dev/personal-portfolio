@@ -81,7 +81,7 @@ This project is created by **Mohammad Ghorbani** as a showcase of modern fronten
 
 - **Creator & Developer**: [Mohammad Ghorbani](https://github.com/MohammadGhorbani-dev)
 - **Source Repository**: [https://github.com/MohammadGhorbani-dev/personal-portfolio](https://github.com/MohammadGhorbani-dev/personal-portfolio)
-- **Live Demo**: [personal-portfolio-4ch.pages.dev](https://personal-portfolio-4ch.pages.dev/) (deployed from `main`)
+- **Live Demo**: [portfolio-demo.mohammadghorbani-dev.ir](https://portfolio-demo.mohammadghorbani-dev.ir/) (deployed from `main`)
 
 ---
 

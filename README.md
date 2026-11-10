@@ -6,6 +6,32 @@ A bilingual, interactive developer portfolio built with **React 19, TypeScript, 
 
 > **About this demo:** This website was created by **Mohammad Ghorbani**. **Alex Morgan** is a fictional portfolio persona—not the developer or owner of the project. The biography, career history, project concepts, GitHub-style statistics, social profiles, and downloadable resume are sample content created for demonstration.
 
+## Screenshots
+
+Desktop, English. The creator credit appears alongside the fictional persona.
+
+![English desktop home page](docs/images/desktop-en.jpg)
+
+Desktop project gallery with clearly marked concept cards.
+
+![English project gallery](docs/images/projects-en.jpg)
+
+Mobile, Persian. The navigation, introduction, and demo disclosure use right-to-left layout.
+
+<img src="docs/images/mobile-fa.jpg" width="390" alt="Persian mobile home page with fictional persona disclosure and Mohammad Ghorbani's creator credit">
+
+These screenshots were captured from the running production build at 1440×1000 and 390×844. They show sample content.
+
+## Engineering case study
+
+I built this demo to show how an expressive portfolio can support both English and Persian while keeping navigation and content usable on smaller screens. My work covers the React components, translations, layout, interaction design, and performance review.
+
+The scroll background originally requested all 150 JPEG frames when the page opened. I changed it to show one static frame first and load the current scroll frame and its neighbor on demand, with at most two image requests in flight and a bounded decoded-image cache. A failed frame keeps the last usable background visible. Project images and social card imagery load as they approach the viewport.
+
+The portrait was resized for its display size, reducing the file from 2,145,807 to 21,119 bytes. In a fresh local Chromium page, the initial frame requests fell from the 150-frame startup loop to a single frame request. These are file-size and request-count observations from the local production build.
+
+The reduced-motion preference uses a static background and suppresses decorative motion. Automated browser checks cover both language directions, the initial media requests, a failed background image, reduced motion, and the contact form's local demo behavior. The project cards illustrate interface concepts, and the form reports its demonstration status directly to the visitor.
+
 ## Highlights
 
 - **English and Persian:** Language switching with left-to-right (LTR) and right-to-left (RTL) layouts.
@@ -39,7 +65,7 @@ A bilingual, interactive developer portfolio built with **React 19, TypeScript, 
 ```bash
 git clone https://github.com/MohammadGhorbani-dev/personal-portfolio.git
 cd personal-portfolio
-npm install
+npm ci
 npm run dev
 ```
 
@@ -52,7 +78,10 @@ npm run dev      # Start the development server
 npm run lint     # Run TypeScript type checking (tsc --noEmit)
 npm run build    # Generate the production build in dist/
 npm run preview  # Preview the production build locally
+npm run test:e2e # Test the built demo with Chromium
 ```
+
+For browser checks, run `npm run build`, `npx playwright install chromium`, and `npm run test:e2e`. The test runner starts a local preview server automatically. GitHub Actions runs the locked install, TypeScript check, production build, and desktop/mobile browser checks on pushes and pull requests.
 
 ## Project Files
 
@@ -88,4 +117,4 @@ The current demo does not require backend credentials or environment variables f
 
 This repository demonstrates a **portfolio frontend**, not production implementations of the fictional messaging, analytics, contacts, or productivity products featured in its cards. No live social accounts or payment services are connected to the demo showcase.
 
-No open-source license is currently included in this repository. Public access to the source does not, by itself, grant permission to reuse or redistribute the code or assets.
+The source code, configuration, tests, and project documentation are licensed under [Apache-2.0](LICENSE). This permits reuse, including commercial reuse, subject to the license conditions. The demo's images, GIFs, sample CV, and screenshots have separate reuse terms described in [ASSETS.md](ASSETS.md).

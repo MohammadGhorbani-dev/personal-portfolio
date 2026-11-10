@@ -2,6 +2,8 @@
 
 An interactive, bilingual (English & Persian) developer portfolio built with React 19, TypeScript, Vite, Tailwind CSS v4, and Motion.
 
+This branch contains an earlier demo snapshot. See [the main branch](https://github.com/MohammadGhorbani-dev/personal-portfolio/tree/main) for the current implementation, screenshots, case study, and automated checks.
+
 This project is created by **Mohammad Ghorbani** as a showcase of modern frontend engineering, animation craftsmanship, and responsive interface design.
 
 > **Note on Portfolio Persona**:  
@@ -15,7 +17,7 @@ This project is created by **Mohammad Ghorbani** as a showcase of modern fronten
 - **Scroll-Driven Canvas Animation**: High-performance 2D Canvas sequence driven by viewport scroll progress.
 - **Micro-Interactions & Physics**: Magnetic wrappers, 3D tilt cards, and cursor effects powered by Motion springs.
 - **Liquid Glass Aesthetic**: Translucent frosted panels, backdrop blur filters, and restrained dark-canvas styling.
-- **Simulated Demo Mode**: The contact form and statistics operate entirely on the client side with zero external network requests, data tracking, or backend telemetry.
+- **Simulated Demo Mode**: The contact form and sample statistics run locally in the browser. Font files are loaded through Google Fonts.
 - **Accessible & Responsive**: Fully responsive layout with keyboard accessibility, ARIA labels, live status announcements, and touch-aware pointer handling.
 
 ---
@@ -34,7 +36,7 @@ This project is created by **Mohammad Ghorbani** as a showcase of modern fronten
 
 ### Prerequisites
 
-- Node.js (v18.0.0 or higher recommended)
+- Node.js (v20.0.0 or higher recommended)
 - npm or compatible package manager
 
 ### Installation
@@ -59,7 +61,7 @@ This project is created by **Mohammad Ghorbani** as a showcase of modern fronten
 ### Available Scripts
 
 - `npm run dev` — Starts the Vite development server on port 3000.
-- `npm run build` — Compiles TypeScript and creates an optimized production bundle in `dist/`.
+- `npm run build` — Creates a production bundle in `dist/`.
 - `npm run preview` — Locally previews the production build.
 - `npm run lint` — Runs TypeScript type-checking (`tsc --noEmit`).
 
@@ -70,7 +72,7 @@ This project is created by **Mohammad Ghorbani** as a showcase of modern fronten
 - `public/profile.jpg` — Fictional avatar image.
 - `public/cv.pdf` — Sample resume asset for demo download (`Alex-Morgan-Sample-Resume.pdf`).
 - `public/p1.jpg` – `public/p4.jpg` — Project showcase imagery.
-- `public/frames/` — 100-frame image sequence for the scroll-driven background animation.
+- `public/frames/` — 150-frame image sequence for the scroll-driven background animation.
 - `public/assets/gifs/` — Social media card background animations.
 
 ---
@@ -79,10 +81,10 @@ This project is created by **Mohammad Ghorbani** as a showcase of modern fronten
 
 - **Creator & Developer**: [Mohammad Ghorbani](https://github.com/MohammadGhorbani-dev)
 - **Source Repository**: [https://github.com/MohammadGhorbani-dev/personal-portfolio](https://github.com/MohammadGhorbani-dev/personal-portfolio)
-- **Live Demo**: `https://your-domain-or-deployment-url.app` (Placeholder)
+- **Live Demo**: [personal-portfolio-4ch.pages.dev](https://personal-portfolio-4ch.pages.dev/) (deployed from `main`)
 
 ---
 
 ## License
 
-This project is open-source under the Apache-2.0 License.
+The source code, configuration, and project documentation are licensed under [Apache-2.0](LICENSE). Demo images, GIFs, the sample CV, and screenshots have separate reuse terms described in [ASSETS.md](ASSETS.md).

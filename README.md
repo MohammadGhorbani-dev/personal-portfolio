@@ -60,6 +60,8 @@ The reduced-motion preference uses a static background and suppresses decorative
 - Node.js 20 or newer is recommended.
 - npm
 
+Dependencies are pinned in `package-lock.json`. Use `npm ci` for local and hosted builds.
+
 ### Run locally
 
 ```bash
